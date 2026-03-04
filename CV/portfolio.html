@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio — Khalil Sharaf</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #080808;
+      --surface: rgba(255,255,255,0.04);
+      --border: rgba(255,255,255,0.08);
+      --text: #f0ede8;
+      --muted: rgba(240,237,232,0.45);
+      --accent: #c9a96e;
+      --accent2: #7eb8c9;
+      --radius: 16px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    #shader-canvas {
+      position: fixed; inset: 0; z-index: 0; opacity: 0.25; pointer-events: none;
+    }
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 20px 40px;
+      backdrop-filter: blur(20px);
+      background: rgba(8,8,8,0.6);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif; font-size: 22px;
+      font-weight: 300; letter-spacing: 0.05em; color: var(--accent);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 32px; align-items: center; list-style: none; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none; font-size: 13px;
+      letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a.active { color: var(--accent); }
+    .lang-toggle {
+      display: flex; gap: 6px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 20px; padding: 4px 6px;
+    }
+    .lang-btn {
+      background: none; border: none; color: var(--muted); font-size: 12px;
+      font-weight: 500; letter-spacing: 0.06em; padding: 4px 10px;
+      border-radius: 14px; cursor: pointer; transition: all 0.2s;
+      font-family: 'Inter', sans-serif;
+    }
+    .lang-btn.active { background: var(--accent); color: #080808; }
+
+    /* PAGE HEADER */
+    .page-header {
+      position: relative; z-index: 1;
+      padding: 140px 40px 80px;
+      max-width: 1200px; margin: 0 auto;
+      text-align: center;
+    }
+    .page-tag {
+      font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 16px;
+    }
+    .page-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(48px, 7vw, 84px); font-weight: 300;
+      line-height: 0.95; margin-bottom: 20px;
+    }
+    .page-title em { font-style: italic; color: var(--accent); }
+    .page-sub {
+      font-size: 15px; color: var(--muted); max-width: 500px; margin: 0 auto;
+      font-weight: 300;
+    }
+
+    /* PORTFOLIO GRID */
+    .portfolio-section {
+      position: relative; z-index: 1;
+      padding: 20px 40px 80px;
+      max-width: 1200px; margin: 0 auto;
+    }
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 20px;
+    }
+
+    /* IMAGE FROSTED CARD */
+    .pcard {
+      position: relative; border-radius: 20px; overflow: hidden;
+      aspect-ratio: 4/3;
+      background: #111;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s;
+      will-change: transform;
+    }
+    .pcard:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 30px 70px rgba(0,0,0,0.5);
+      border-color: rgba(201,169,110,0.4);
+    }
+    .pcard-bg {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 80px; opacity: 0.15;
+      background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+      transition: opacity 0.3s;
+    }
+    .pcard:hover .pcard-bg { opacity: 0.25; }
+    .pcard-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(8,8,8,0.9) 0%, rgba(8,8,8,0.3) 50%, transparent 100%);
+    }
+    .pcard-content {
+      position: absolute; bottom: 0; left: 0; right: 0; padding: 28px;
+    }
+    .pcard-tag {
+      font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 8px;
+    }
+    .pcard-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px; font-weight: 400; margin-bottom: 8px; line-height: 1.15;
+    }
+    .pcard-desc {
+      font-size: 13px; color: rgba(240,237,232,0.65); line-height: 1.6;
+    }
+    .pcard-meta {
+      position: absolute; top: 20px; right: 20px;
+      background: rgba(8,8,8,0.8); border: 1px solid var(--border);
+      backdrop-filter: blur(12px); border-radius: 100px;
+      padding: 6px 14px; font-size: 11px; color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+
+    /* CERTS */
+    .certs-section {
+      position: relative; z-index: 1;
+      padding: 0 40px 80px;
+      max-width: 1200px; margin: 0 auto;
+    }
+    .section-tag {
+      font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 3.5vw, 42px); font-weight: 300;
+      margin-bottom: 32px;
+    }
+    .certs-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 12px;
+    }
+    .cert-item {
+      display: flex; align-items: flex-start; gap: 14px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 18px 20px;
+      transition: border-color 0.2s;
+    }
+    .cert-item:hover { border-color: rgba(201,169,110,0.3); }
+    .cert-year {
+      font-size: 11px; color: var(--accent); letter-spacing: 0.05em;
+      white-space: nowrap; padding-top: 2px;
+    }
+    .cert-name { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--border), transparent);
+      margin: 0 40px 60px;
+      position: relative; z-index: 1;
+    }
+    footer {
+      position: relative; z-index: 1; text-align: center;
+      padding: 40px; color: var(--muted); font-size: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .nav-links { display: none; }
+      .page-header { padding: 100px 20px 60px; }
+      .portfolio-section, .certs-section { padding-left: 20px; padding-right: 20px; }
+    }
+
+
+    .pcard-bg-logo {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0.08; transition: opacity 0.4s; overflow: hidden;
+    }
+    .pcard:hover .pcard-bg-logo { opacity: 0.15; }
+    .pcard-bg-logo img { width: 75%; height: 75%; object-fit: contain; }
+    .pcard-bg-txt {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 72px; font-weight: 800; font-family: var(--font-heading);
+      color: rgba(255,255,255,0.05); letter-spacing: -0.04em;
+      transition: color 0.4s; user-select: none;
+    }
+    .pcard:hover .pcard-bg-txt { color: rgba(255,255,255,0.09); }
+    /* Visible logo badge */
+    .pcard-logo {
+      position: absolute; top: 20px; left: 22px; z-index: 3;
+      display: flex; align-items: center; height: 34px;
+    }
+    .pcard-logo img {
+      max-height: 26px; max-width: 100px; width: auto; object-fit: contain;
+      opacity: 0.8; transition: opacity 0.3s;
+      filter: drop-shadow(0 1px 5px rgba(0,0,0,0.7));
+    }
+    .pcard:hover .pcard-logo img { opacity: 1; }
+    .pcard-logo-txt {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; color: rgba(240,237,232,0.45);
+      transition: color 0.3s; text-shadow: 0 1px 5px rgba(0,0,0,0.8);
+    }
+    .pcard:hover .pcard-logo-txt { color: rgba(240,237,232,0.85); }
+    /* Cert award icon */
+    .cert-icon { flex-shrink:0; width:22px; height:22px; margin-top:2px; opacity:0.5; }
+    .cert-icon svg { width:18px; height:18px; stroke: var(--accent); }
+
+    [data-lang="ru"] { display: none; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .page-tag { animation: fadeUp 0.5s ease both; }
+    .page-title { animation: fadeUp 0.5s 0.1s ease both; }
+    .page-sub { animation: fadeUp 0.5s 0.2s ease both; }
+  </style>
+</head>
+<body>
+
+<canvas id="shader-canvas"></canvas>
+
+<nav>
+  <a href="index.html" class="nav-logo">K · S</a>
+  <ul class="nav-links">
+    <li><a href="index.html" data-en="Home" data-ru="Главная">Home</a></li>
+    <li><a href="portfolio.html" class="active" data-en="Portfolio" data-ru="Портфолио">Portfolio</a></li>
+    <li><a href="/cdn-cgi/l/email-protection#5d2e34302d312436353c3134311d243c33393825732f28" data-en="Contact" data-ru="Контакт">Contact</a></li>
+  </ul>
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('ru')">RU</button>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="page-tag" data-lang="en">Selected Work</div>
+  <div class="page-tag" data-lang="ru">Избранные работы</div>
+  <h1 class="page-title">
+    <span data-lang="en">Portfolio &<br /><em>Experience</em></span>
+    <span data-lang="ru">Портфолио &<br /><em>Опыт</em></span>
+  </h1>
+  <p class="page-sub">
+    <span data-lang="en">Projects and achievements across product management, localization, and startup building.</span>
+    <span data-lang="ru">Проекты и достижения в продуктовом менеджменте, локализации и стартапах.</span>
+  </p>
+</div>
+
+<div class="portfolio-section">
+  <div class="portfolio-grid">
+
+    <!-- Card 1 -->
+    <div class="pcard" data-tilt>
+      <div class="pcard-bg-logo"><img src="Yango_Play.svg" alt="Yandex bg" /></div>
+      <div class="pcard-logo"><img src="Yango_Play.svg" alt="Yandex" /></div>
+      <div class="pcard-overlay"></div>
+      <div class="pcard-meta">2023 — Present</div>
+      <div class="pcard-content">
+        <div class="pcard-tag" data-lang="en">Streaming · MENA</div>
+        <div class="pcard-tag" data-lang="ru">Стриминг · MENA</div>
+        <div class="pcard-title">Yango Play Launch</div>
+        <p class="pcard-desc">
+          <span data-lang="en">Contributed to the regional launch of Yandex's streaming platform in MENA, coordinating with studios across the Middle East and managing localization pipelines for global content partners.</span>
+          <span data-lang="ru">Участвовал в региональном запуске стримингового сервиса Яндекса в MENA. Координировал работу со студиями Ближнего Востока и управлял пайплайном локализации для глобальных партнёров.</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="pcard" data-tilt>
+      <div class="pcard-bg-txt">K</div>
+      <div class="pcard-logo"><span class="pcard-logo-txt">Kareta</span></div>
+      <div class="pcard-overlay"></div>
+      <div class="pcard-meta">2025 — 2026</div>
+      <div class="pcard-content">
+        <div class="pcard-tag" data-lang="en">Startup · Mobility</div>
+        <div class="pcard-tag" data-lang="ru">Стартап · Мобильность</div>
+        <div class="pcard-title">Kareta</div>
+        <p class="pcard-desc">
+          <span data-lang="en">Founded and operated a ride-sharing startup from concept to MVP. Advanced to the finals of MIPT's Phystech.Idea accelerator program — a federal-level competition for technology ventures.</span>
+          <span data-lang="ru">Основал и развил стартап заказа поездок от идеи до MVP. Вышел в финал акселератора МФТИ «Физтех.Идея» — федерального конкурса технологических проектов.</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="pcard" data-tilt>
+      <div class="pcard-bg-txt">AI</div>
+      <div class="pcard-logo"><span class="pcard-logo-txt">Merlin Clone</span></div>
+      <div class="pcard-overlay"></div>
+      <div class="pcard-meta">2025</div>
+      <div class="pcard-content">
+        <div class="pcard-tag" data-lang="en">AI · Film Tech</div>
+        <div class="pcard-tag" data-lang="ru">AI · Кино</div>
+        <div class="pcard-title">AI VoiceOver — Merlin Clone</div>
+        <p class="pcard-desc">
+          <span data-lang="en">Worked as Product Manager on an AI-powered VoiceOver technology for professional film and video production. Drove product process improvements and user experience enhancements.</span>
+          <span data-lang="ru">Работал продуктовым менеджером AI-технологии VoiceOver для профессионального кино и видео. Улучшал продуктовые процессы и пользовательский опыт.</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="pcard" data-tilt>
+      <div class="pcard-bg-logo"><img src="data:image/jpeg;base64,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AATs8V/2n8MNV8KzSFptEvvMiUnpBOCwA/4GspP1FAH1DRRRQB+Pni//AJGzWP8Ar+n/APRjVlVq+L/+Rs1j/r+n/wDRjVlUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQBvfD+WKDx34fnnlSKKPVLZ5JHYBVUSqSSTwAAMk1+qP8Awsf4ef8AQ+eFv/BvB/8AF1+SFFAH63/8LH+Hn/Q+eFv/AAbwf/F14v8AtoeMvB+s/s/a1YaR4r0HUbt7i1KQWuoRSyNidCcKrEnAGT6V+fFFABXvH7EHjez8HfGqOHVb+Cx0vWLKW0nmuJRHFG4AkjZmJAHKFQSf468HooA/W/8A4WP8PP8AofPC3/g3g/8Ai6P+Fj/Dz/ofPC3/AIN4P/i6/JCigDU8VOkvifVZY3WSN72ZlZTkMC5III6jHesuiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA//Z" alt="RuFilms bg" /></div>
+      <div class="pcard-logo"><img src="data:image/jpeg;base64,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AATs8V/2n8MNV8KzSFptEvvMiUnpBOCwA/4GspP1FAH1DRRRQB+Pni//AJGzWP8Ar+n/APRjVlVq+L/+Rs1j/r+n/wDRjVlUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQBvfD+WKDx34fnnlSKKPVLZ5JHYBVUSqSSTwAAMk1+qP8Awsf4ef8AQ+eFv/BvB/8AF1+SFFAH63/8LH+Hn/Q+eFv/AAbwf/F14v8AtoeMvB+s/s/a1YaR4r0HUbt7i1KQWuoRSyNidCcKrEnAGT6V+fFFABXvH7EHjez8HfGqOHVb+Cx0vWLKW0nmuJRHFG4AkjZmJAHKFQSf468HooA/W/8A4WP8PP8AofPC3/g3g/8Ai6P+Fj/Dz/ofPC3/AIN4P/i6/JCigDU8VOkvifVZY3WSN72ZlZTkMC5III6jHesuiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA//Z" alt="RuFilms" /></div>
+      <div class="pcard-overlay"></div>
+      <div class="pcard-meta">2019 — 2022</div>
+      <div class="pcard-content">
+        <div class="pcard-tag" data-lang="en">Localization · Media</div>
+        <div class="pcard-tag" data-lang="ru">Локализация · Медиа</div>
+        <div class="pcard-title">MENA Content Localization</div>
+        <p class="pcard-desc">
+          <span data-lang="en">Led Arabic-Russian-English localization for film content distributed across the MENA region. Handled complex medical lecture translations for Qatar University alongside media projects.</span>
+          <span data-lang="ru">Руководил локализацией киноконтента для региона MENA. Переводил сложные медицинские лекции для Университета Катара параллельно с медиапроектами.</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="pcard" data-tilt>
+      <div class="pcard-bg-txt">CC</div>
+      <div class="pcard-logo"><span class="pcard-logo-txt">Changellenge</span></div>
+      <div class="pcard-overlay"></div>
+      <div class="pcard-meta">2025</div>
+      <div class="pcard-content">
+        <div class="pcard-tag" data-lang="en">Case Competition</div>
+        <div class="pcard-tag" data-lang="ru">Кейс-чемпионат</div>
+        <div class="pcard-title">Changellenge & VK Case Championships</div>
+        <p class="pcard-desc">
+          <span data-lang="en">Participated in Changellenge Cup Moscow 2025 and the VKontakte case championship — applying strategic business analysis and product thinking to real-world business challenges.</span>
+          <span data-lang="ru">Участвовал в Changellenge Cup Moscow 2025 и кейс-чемпионате ВКонтакте — применял стратегический анализ и продуктовое мышление к реальным бизнес-задачам.</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Card 6 -->
+    <div class="pcard" data-tilt>
+      <div class="pcard-bg-txt">MS</div>
+      <div class="pcard-bg-logo"><img src="mipt.svg"</div>
+      <div class="pcard-overlay"></div>
+      <div class="pcard-meta">2025 — 2027</div>
+      <div class="pcard-content">
+        <div class="pcard-tag" data-lang="en">Research · MIPT</div>
+        <div class="pcard-tag" data-lang="ru">Исследования · МФТИ</div>
+        <div class="pcard-title">IT Product Management (MSc)</div>
+        <p class="pcard-desc">
+          <span data-lang="en">Currently pursuing a Master's at MIPT — one of Russia's top technical universities — focusing on business informatics and IT product management methodologies.</span>
+          <span data-lang="ru">Магистратура в МФТИ — одном из ведущих технических университетов России. Специализация: бизнес-информатика и управление IT-продуктами.</span>
+        </p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- CERTIFICATES -->
+<div class="certs-section">
+  <div class="section-tag" data-lang="en">Certificates & Courses</div>
+  <div class="section-tag" data-lang="ru">Курсы и сертификаты</div>
+  <h2 class="section-title">
+    <span data-lang="en">Continuous Learning</span>
+    <span data-lang="ru">Непрерывное обучение</span>
+  </h2>
+  <div class="certs-list">
+    <div class="cert-item">
+      <div class="cert-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg></div>
+      <div class="cert-year">2026</div>
+      <div class="cert-name">
+        <span data-lang="en">Professional Retraining Diploma: Applied Data Analytics — Digital Department, PUSK</span>
+        <span data-lang="ru">Диплом о переподготовке: Прикладная аналитика данных — Цифровая кафедра, ПУСК</span>
+      </div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg></div>
+      <div class="cert-year">2025</div>
+      <div class="cert-name">
+        <span data-lang="en">Data Analyst — SkyPro</span>
+        <span data-lang="ru">Аналитик данных — SkyPro</span>
+      </div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg></div>
+      <div class="cert-year">2025</div>
+      <div class="cert-name">
+        <span data-lang="en">Effective Startup Management — MIPT, Phystech.Idea</span>
+        <span data-lang="ru">Эффективное управление стартапом — МФТИ, Физтех.Идея</span>
+      </div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg></div>
+      <div class="cert-year">2024</div>
+      <div class="cert-name">
+        <span data-lang="en">Critical Thinking — Oxford</span>
+        <span data-lang="ru">Критическое мышление — Oxford</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span data-lang="en">© 2025 Khalil Sharaf · <a href="index.html" style="color:var(--accent);text-decoration:none;">← Back to Home</a></span>
+  <span data-lang="ru">© 2025 Шараф Халиль · <a href="index.html" style="color:var(--accent);text-decoration:none;">← На главную</a></span>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// SHADER
+(function(){
+  const canvas = document.getElementById('shader-canvas');
+  const gl = canvas.getContext('webgl');
+  if(!gl) return;
+  const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+  function resize(){ canvas.width=window.innerWidth; canvas.height=window.innerHeight; gl.viewport(0,0,canvas.width,canvas.height); }
+  resize(); window.addEventListener('resize',resize);
+  const vs=`attribute vec2 a_pos;void main(){gl_Position=vec4(a_pos,0,1);}`;
+  const fs=`precision highp float;uniform vec2 u_res;uniform float u_time;float random(in float x){return fract(sin(x)*1e4);}float random(in vec2 st){return fract(sin(dot(st.xy,vec2(12.9898,78.233)))*43758.5453123);}void main(){vec2 uv=(gl_FragCoord.xy*2.0-u_res.xy)/min(u_res.x,u_res.y);vec2 fMosaicScal=vec2(4.0,2.0);vec2 vScreenSize=vec2(256.0,256.0);uv.x=floor(uv.x*vScreenSize.x/fMosaicScal.x)/(vScreenSize.x/fMosaicScal.x);uv.y=floor(uv.y*vScreenSize.y/fMosaicScal.y)/(vScreenSize.y/fMosaicScal.y);float t=u_time*0.06+random(uv.x)*0.4;float lineWidth=0.0008;vec3 color=vec3(0.0);for(int j=0;j<3;j++){for(int i=0;i<5;i++){color[j]+=lineWidth*float(i*i)/abs(fract(t-0.01*float(j)+float(i)*0.01)*1.0-length(uv));}}gl_FragColor=vec4(color[2],color[1],color[0],1.0);}`;
+  function sh(t,s){const x=gl.createShader(t);gl.shaderSource(x,s);gl.compileShader(x);return x;}
+  const p=gl.createProgram();
+  gl.attachShader(p,sh(gl.VERTEX_SHADER,vs));gl.attachShader(p,sh(gl.FRAGMENT_SHADER,fs));gl.linkProgram(p);gl.useProgram(p);
+  const b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
+  const pos=gl.getAttribLocation(p,'a_pos');gl.enableVertexAttribArray(pos);gl.vertexAttribPointer(pos,2,gl.FLOAT,false,0,0);
+  const uR=gl.getUniformLocation(p,'u_res'),uT=gl.getUniformLocation(p,'u_time');
+  let t=0;
+  function render(){requestAnimationFrame(render);t+=0.05;gl.uniform2f(uR,canvas.width,canvas.height);gl.uniform1f(uT,t);gl.drawArrays(gl.TRIANGLE_STRIP,0,4);}
+  if(!isMobile) render();
+  else { let lf=0; function mrender(n){if(n-lf>50){lf=n;t+=0.05;gl.uniform2f(uR,canvas.width,canvas.height);gl.uniform1f(uT,t);gl.drawArrays(gl.TRIANGLE_STRIP,0,4);} requestAnimationFrame(mrender);} mrender(0); }
+})();
+
+// TILT
+document.querySelectorAll('[data-tilt]').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - 0.5;
+    const y = (e.clientY - r.top) / r.height - 0.5;
+    card.style.transform = `perspective(1000px) rotateY(${x*10}deg) rotateX(${-y*10}deg) translateY(-8px) scale(1.02)`;
+  });
+  card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+});
+
+// LANG
+function setLang(lang){
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+  document.querySelectorAll('[data-lang]').forEach(el=>{
+    el.style.display = el.getAttribute('data-lang')===lang ? '' : 'none';
+  });
+  document.querySelectorAll('[data-en]').forEach(el=>{
+    el.textContent = lang==='en' ? el.getAttribute('data-en') : el.getAttribute
