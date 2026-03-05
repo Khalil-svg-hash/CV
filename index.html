@@ -1158,7 +1158,7 @@ document.querySelectorAll('[data-tilt]').forEach(card => {
     const r = card.getBoundingClientRect();
     const x = (e.clientX - r.left) / r.width - 0.5;
     const y = (e.clientY - r.top) / r.height - 0.5;
-    card.style.transform = `perspective(800px) rotateY(${x*12}deg) rotateX(${-y*12}deg) scale(1.02)`;
+    card.style.transform = `perspective(500px) rotateY(${x*25}deg) rotateX(${-y*25}deg) scale(1.03)`;
   });
   card.addEventListener('mouseleave', () => {
     card.style.transform = '';
@@ -1172,7 +1172,7 @@ if(portrait){
     const r = portrait.getBoundingClientRect();
     const x = (e.clientX - r.left) / r.width - 0.5;
     const y = (e.clientY - r.top) / r.height - 0.5;
-    portrait.style.transform = `perspective(1000px) rotateY(${x*15}deg) rotateX(${-y*15}deg) translateY(-6px) scale(1.02)`;
+    portrait.style.transform = `perspective(700px) rotateY(${x*30}deg) rotateX(${-y*30}deg) translateY(-6px) scale(1.03)`;
   });
   portrait.addEventListener('mouseleave', () => {
     portrait.style.transform = '';
