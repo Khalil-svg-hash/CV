@@ -170,48 +170,24 @@
       border-width: 10px;
     }
 
-    /* Portfolio card inner elements */
-    .pcard {
-      position: relative;
-      aspect-ratio: 4/3;
-      cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      will-change: transform;
-      border-radius: 20px;
-      background: #111; /* fallback */
-    }
-    .pcard:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 30px 70px rgba(0,0,0,0.5);
-    }
-
-    /* Inner background elements need to be clipped to the card's border radius */
-    .pcard-bg-logo,
-    .pcard-bg-txt,
-    .pcard-overlay {
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      overflow: hidden;
-    }
-
+    /* Portfolio card inner elements (unchanged) */
     .pcard-bg-logo {
+      position: absolute; inset: 0;
       display: flex; align-items: center; justify-content: center;
-      opacity: 0.08; transition: opacity 0.4s;
+      opacity: 0.08; transition: opacity 0.4s; overflow: hidden;
       z-index: 0;
     }
     .pcard:hover .pcard-bg-logo { opacity: 0.15; }
     .pcard-bg-logo img { width: 75%; height: 75%; object-fit: contain; }
-
     .pcard-bg-txt {
+      position: absolute; inset: 0;
       display: flex; align-items: center; justify-content: center;
-      font-size: 72px; font-weight: 800; font-family: 'Cormorant Garamond', serif;
+      font-size: 72px; font-weight: 800; font-family: var(--font-heading);
       color: rgba(255,255,255,0.05); letter-spacing: -0.04em;
       transition: color 0.4s; user-select: none;
       z-index: 0;
     }
     .pcard:hover .pcard-bg-txt { color: rgba(255,255,255,0.09); }
-
     .pcard-logo {
       position: absolute; top: 20px; left: 22px; z-index: 3;
       display: flex; align-items: center; height: 34px;
@@ -228,12 +204,11 @@
       transition: color 0.3s; text-shadow: 0 1px 5px rgba(0,0,0,0.8);
     }
     .pcard:hover .pcard-logo-txt { color: rgba(240,237,232,0.85); }
-
     .pcard-overlay {
+      position: absolute; inset: 0;
       background: linear-gradient(to top, rgba(8,8,8,0.9) 0%, rgba(8,8,8,0.3) 50%, transparent 100%);
       z-index: 1;
     }
-
     .pcard-meta {
       position: absolute; top: 20px; right: 20px;
       background: rgba(8,8,8,0.8); border: 1px solid var(--border);
@@ -241,7 +216,6 @@
       padding: 6px 14px; font-size: 11px; color: var(--muted);
       letter-spacing: 0.05em; z-index: 3;
     }
-
     .pcard-content {
       position: absolute; bottom: 0; left: 0; right: 0; padding: 28px;
       z-index: 2;
@@ -256,6 +230,22 @@
     }
     .pcard-desc {
       font-size: 13px; color: rgba(240,237,232,0.65); line-height: 1.6;
+    }
+
+    /* Outer glow card container */
+    .pcard {
+      position: relative;
+      aspect-ratio: 4/3;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      will-change: transform;
+      border-radius: 20px;
+      overflow: hidden;
+      background: #111; /* fallback */
+    }
+    .pcard:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 30px 70px rgba(0,0,0,0.5);
     }
 
     /* CERTS */
@@ -669,7 +659,7 @@
   else { let lf=0; function mrender(n){if(n-lf>50){lf=n;t+=0.05;gl.uniform2f(uR,canvas.width,canvas.height);gl.uniform1f(uT,t);gl.drawArrays(gl.TRIANGLE_STRIP,0,4);} requestAnimationFrame(mrender);} mrender(0); }
 })();
 
-// GLOW EFFECT (21dev) - update mouse position
+// GLOW EFFECT (21dev)
 document.addEventListener('pointermove', (e) => {
   document.querySelectorAll('[data-glow]').forEach(el => {
     el.style.setProperty('--x', e.clientX);
