@@ -103,8 +103,8 @@
       background-color: var(--backdrop, transparent);
       background-image: radial-gradient(
         var(--spotlight-size) var(--spotlight-size) at
-        calc(var(--x, 0) * 1px)
-        calc(var(--y, 0) * 1px),
+        calc(var(--x, -1000) * 1px)
+        calc(var(--y, -1000) * 1px),
         hsl(var(--hue, 210) 100% 70% / 0.1),
         transparent
       );
@@ -112,6 +112,8 @@
       background-position: 50% 50%;
       background-attachment: fixed;
       border-radius: calc(var(--radius) * 1px);
+      --x: -1000;
+      --y: -1000;
     }
 
     [data-glow]::before,
@@ -134,8 +136,8 @@
     [data-glow]::before {
       background-image: radial-gradient(
         calc(var(--spotlight-size) * 0.75) calc(var(--spotlight-size) * 0.75) at
-        calc(var(--x, 0) * 1px)
-        calc(var(--y, 0) * 1px),
+        calc(var(--x, -1000) * 1px)
+        calc(var(--y, -1000) * 1px),
         hsl(var(--hue, 210) 100% 50% / 1),
         transparent 100%
       );
@@ -145,8 +147,8 @@
     [data-glow]::after {
       background-image: radial-gradient(
         calc(var(--spotlight-size) * 0.5) calc(var(--spotlight-size) * 0.5) at
-        calc(var(--x, 0) * 1px)
-        calc(var(--y, 0) * 1px),
+        calc(var(--x, -1000) * 1px)
+        calc(var(--y, -1000) * 1px),
         hsl(0 100% 100% / 1),
         transparent 100%
       );
@@ -370,7 +372,7 @@
         --border-size: calc(var(--border, 2) * 1px);
         --spotlight-size: calc(var(--size, 150) * 1px);
         --hue: calc(var(--base) + (var(--xp, 0) * var(--spread, 0)));
-        background-image: radial-gradient(var(--spotlight-size) var(--spotlight-size) at calc(var(--x, 0) * 1px) calc(var(--y, 0) * 1px), hsl(var(--hue, 210) 100% 70% / 0.1), transparent);
+        background-image: radial-gradient(var(--spotlight-size) var(--spotlight-size) at calc(var(--x, -1000) * 1px) calc(var(--y, -1000) * 1px), hsl(var(--hue, 210) 100% 70% / 0.1), transparent);
         background-color: var(--backdrop, transparent);
         background-size: calc(100% + (2 * var(--border-size))) calc(100% + (2 * var(--border-size)));
         background-position: 50% 50%;
@@ -410,7 +412,7 @@
         --border-size: calc(var(--border, 2) * 1px);
         --spotlight-size: calc(var(--size, 150) * 1px);
         --hue: calc(var(--base) + (var(--xp, 0) * var(--spread, 0)));
-        background-image: radial-gradient(var(--spotlight-size) var(--spotlight-size) at calc(var(--x, 0) * 1px) calc(var(--y, 0) * 1px), hsl(var(--hue, 210) 100% 70% / 0.1), transparent);
+        background-image: radial-gradient(var(--spotlight-size) var(--spotlight-size) at calc(var(--x, -1000) * 1px) calc(var(--y, -1000) * 1px), hsl(var(--hue, 210) 100% 70% / 0.1), transparent);
         background-color: var(--backdrop, transparent);
         background-size: calc(100% + (2 * var(--border-size))) calc(100% + (2 * var(--border-size)));
         background-position: 50% 50%;
@@ -447,7 +449,7 @@
         --border-size: calc(var(--border, 2) * 1px);
         --spotlight-size: calc(var(--size, 150) * 1px);
         --hue: calc(var(--base) + (var(--xp, 0) * var(--spread, 0)));
-        background-image: radial-gradient(var(--spotlight-size) var(--spotlight-size) at calc(var(--x, 0) * 1px) calc(var(--y, 0) * 1px), hsl(var(--hue, 210) 100% 70% / 0.1), transparent);
+        background-image: radial-gradient(var(--spotlight-size) var(--spotlight-size) at calc(var(--x, -1000) * 1px) calc(var(--y, -1000) * 1px), hsl(var(--hue, 210) 100% 70% / 0.1), transparent);
         background-color: var(--backdrop, transparent);
         background-size: calc(100% + (2 * var(--border-size))) calc(100% + (2 * var(--border-size)));
         background-position: 50% 50%;
@@ -487,7 +489,7 @@
         --border-size: calc(var(--border, 2) * 1px);
         --spotlight-size: calc(var(--size, 150) * 1px);
         --hue: calc(var(--base) + (var(--xp, 0) * var(--spread, 0)));
-        background-image: radial-gradient(var(--spotlight-size) var(--spotlight-size) at calc(var(--x, 0) * 1px) calc(var(--y, 0) * 1px), hsl(var(--hue, 210) 100% 70% / 0.1), transparent);
+        background-image: radial-gradient(var(--spotlight-size) var(--spotlight-size) at calc(var(--x, -1000) * 1px) calc(var(--y, -1000) * 1px), hsl(var(--hue, 210) 100% 70% / 0.1), transparent);
         background-color: var(--backdrop, transparent);
         background-size: calc(100% + (2 * var(--border-size))) calc(100% + (2 * var(--border-size)));
         background-position: 50% 50%;
@@ -527,7 +529,7 @@
         --border-size: calc(var(--border, 2) * 1px);
         --spotlight-size: calc(var(--size, 150) * 1px);
         --hue: calc(var(--base) + (var(--xp, 0) * var(--spread, 0)));
-        background-image: radial-gradient(var(--spotlight-size) var(--spotlight-size) at calc(var(--x, 0) * 1px) calc(var(--y, 0) * 1px), hsl(var(--hue, 210) 100% 70% / 0.1), transparent);
+        background-image: radial-gradient(var(--spotlight-size) var(--spotlight-size) at calc(var(--x, -1000) * 1px) calc(var(--y, -1000) * 1px), hsl(var(--hue, 210) 100% 70% / 0.1), transparent);
         background-color: var(--backdrop, transparent);
         background-size: calc(100% + (2 * var(--border-size))) calc(100% + (2 * var(--border-size)));
         background-position: 50% 50%;
@@ -566,7 +568,7 @@
         --border-size: calc(var(--border, 2) * 1px);
         --spotlight-size: calc(var(--size, 150) * 1px);
         --hue: calc(var(--base) + (var(--xp, 0) * var(--spread, 0)));
-        background-image: radial-gradient(var(--spotlight-size) var(--spotlight-size) at calc(var(--x, 0) * 1px) calc(var(--y, 0) * 1px), hsl(var(--hue, 210) 100% 70% / 0.1), transparent);
+        background-image: radial-gradient(var(--spotlight-size) var(--spotlight-size) at calc(var(--x, -1000) * 1px) calc(var(--y, -1000) * 1px), hsl(var(--hue, 210) 100% 70% / 0.1), transparent);
         background-color: var(--backdrop, transparent);
         background-size: calc(100% + (2 * var(--border-size))) calc(100% + (2 * var(--border-size)));
         background-position: 50% 50%;
@@ -669,13 +671,20 @@
   else { let lf=0; function mrender(n){if(n-lf>50){lf=n;t+=0.05;gl.uniform2f(uR,canvas.width,canvas.height);gl.uniform1f(uT,t);gl.drawArrays(gl.TRIANGLE_STRIP,0,4);} requestAnimationFrame(mrender);} mrender(0); }
 })();
 
-// GLOW EFFECT (21dev) - update mouse position
-document.addEventListener('pointermove', (e) => {
-  document.querySelectorAll('[data-glow]').forEach(el => {
-    el.style.setProperty('--x', e.clientX);
-    el.style.setProperty('--xp', e.clientX / window.innerWidth);
-    el.style.setProperty('--y', e.clientY);
-    el.style.setProperty('--yp', e.clientY / window.innerHeight);
+// GLOW EFFECT (21dev) - per card hover
+document.querySelectorAll('[data-glow]').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    // Update with global client coordinates (the effect uses absolute screen position)
+    card.style.setProperty('--x', e.clientX);
+    card.style.setProperty('--xp', e.clientX / window.innerWidth);
+    card.style.setProperty('--y', e.clientY);
+    card.style.setProperty('--yp', e.clientY / window.innerHeight);
+  });
+  card.addEventListener('mouseleave', () => {
+    // Reset to off-screen values so glow disappears
+    card.style.setProperty('--x', '-1000');
+    card.style.setProperty('--y', '-1000');
+    // xp/yp can remain; they don't affect visibility when x,y are off-screen
   });
 });
 
