@@ -1029,4 +1029,20 @@ function setLang(lang){
   document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
 
   // Handle [data-lang] elements
-  documen
+  document.querySelectorAll('[data-lang]').forEach(el => {
+    el.style.display = el.getAttribute('data-lang') === lang ? '' : 'none';
+  });
+
+  // Handle [data-en] / [data-ru] attributes on nav links
+  document.querySelectorAll('[data-en][data-ru]').forEach(el => {
+    el.textContent = lang === 'en' ? el.getAttribute('data-en') : el.getAttribute('data-ru');
+  });
+
+  localStorage.setItem('lang', lang);
+}
+
+// Initialize language on page load
+setLang(localStorage.getItem('lang') || 'en');
+</script>
+</body>
+</html>
