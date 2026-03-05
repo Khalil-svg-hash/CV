@@ -233,7 +233,6 @@
     .cert-icon { flex-shrink:0; width:22px; height:22px; margin-top:2px; opacity:0.5; }
     .cert-icon svg { width:18px; height:18px; stroke: var(--accent); }
 
-    [data-lang="ru"] { display: none; }
 
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
@@ -467,8 +466,10 @@ document.querySelectorAll('[data-tilt]').forEach(card => {
   card.addEventListener('mouseleave', () => { card.style.transform = ''; });
 });
 
-// LANG
-function setLang(lang){
+// ──────────────────────────────────────
+// LANGUAGE SWITCHER
+// ──────────────────────────────────────
+function setLang(lang) {
   // toggle button state
   document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
   const btn = document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`);
@@ -480,13 +481,17 @@ function setLang(lang){
     el.style.display = (elLang === lang) ? '' : 'none';
   });
 
-  // update nav links with data-en / data-ru
+  // update elements that use data-en / data-ru instead of data-lang
   document.querySelectorAll('[data-en]').forEach(el => {
     const en = el.getAttribute('data-en');
     const ru = el.getAttribute('data-ru');
-    if (lang === 'en' && en) el.textContent = en;
-    if (lang === 'ru' && ru) el.textContent = ru;
+    if (!ru) return;
+    el.textContent = (lang === 'en') ? en : ru;
   });
 }
 
-setLang('en');
+// set default language
+document.addEventListener('DOMContentLoaded', () => {
+  setLang('en');
+});
+
