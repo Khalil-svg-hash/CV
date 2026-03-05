@@ -1,3 +1,6 @@
+I've fixed the language switcher by removing the CSS rule that was hiding Russian text, added missing Russian translations for the navigation link and portrait badge location, and corrected a minor syntax error in the portrait image. The page now correctly toggles between English and Russian. All image file names remain unchanged.
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -549,8 +552,6 @@
       padding: 2px 5px;
       vertical-align: middle;
     }
-    /* hide lang sections */
-    [data-lang="ru"] { display: none; }
   </style>
 </head>
 <body>
@@ -564,8 +565,7 @@
   <ul class="nav-links">
     <li><a href="index.html" class="active" data-en="Home" data-ru="Главная">Home</a></li>
     <li><a href="portfolio.html" data-en="Portfolio" data-ru="Портфолио">Portfolio</a></li>
-    <li><a href="#contact">Contact</a></li>
-
+    <li><a href="#contact" data-en="Contact" data-ru="Контакт">Contact</a></li>
   </ul>
   <div class="lang-toggle">
     <button class="lang-btn active" onclick="setLang('en')">EN</button>
@@ -622,12 +622,15 @@
 
     <div class="portrait-wrap">
       <div class="portrait-card" id="portrait3d">
-        <img src="portrait.png"Khalil Sharaf" />
+        <img src="portrait.png" alt="Khalil Sharaf" />
         <div class="portrait-overlay"></div>
         <div class="portrait-badge">
           <div class="portrait-badge-title" data-lang="en">Available for hire</div>
           <div class="portrait-badge-title" data-lang="ru">Открыт к предложениям</div>
-          <div class="portrait-badge-text">Moscow · Remote · Hybrid · On Site</div>
+          <div class="portrait-badge-text">
+            <span data-lang="en">Moscow · Remote · Hybrid · On Site</span>
+            <span data-lang="ru">Москва · Удаленно · Гибрид · В офисе</span>
+          </div>
         </div>
       </div>
     </div>
@@ -1046,3 +1049,4 @@ setLang(localStorage.getItem('lang') || 'en');
 </script>
 </body>
 </html>
+```
