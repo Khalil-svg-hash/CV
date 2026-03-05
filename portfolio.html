@@ -469,10 +469,24 @@ document.querySelectorAll('[data-tilt]').forEach(card => {
 
 // LANG
 function setLang(lang){
-  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
-  document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
-  document.querySelectorAll('[data-lang]').forEach(el=>{
-    el.style.display = el.getAttribute('data-lang')===lang ? '' : 'none';
+  // toggle button state
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  const btn = document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`);
+  if (btn) btn.classList.add('active');
+
+  // show/hide elements with data-lang
+  document.querySelectorAll('[data-lang]').forEach(el => {
+    const elLang = el.getAttribute('data-lang');
+    el.style.display = (elLang === lang) ? '' : 'none';
   });
-  document.querySelectorAll('[data-en]').forEach(el=>{
-    el.textContent = lang==='en' ? el.getAttribute('data-en') : el.getAttribute
+
+  // update nav links with data-en / data-ru
+  document.querySelectorAll('[data-en]').forEach(el => {
+    const en = el.getAttribute('data-en');
+    const ru = el.getAttribute('data-ru');
+    if (lang === 'en' && en) el.textContent = en;
+    if (lang === 'ru' && ru) el.textContent = ru;
+  });
+}
+
+setLang('en');
