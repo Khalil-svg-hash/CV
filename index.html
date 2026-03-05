@@ -549,8 +549,7 @@
       padding: 2px 5px;
       vertical-align: middle;
     }
-    /* hide lang sections */
-    [data-lang="ru"] { display: none; }
+
   </style>
 </head>
 <body>
@@ -1036,14 +1035,17 @@ function setLang(lang){
     el.style.display = (elLang === lang) ? '' : 'none';
   });
 
-  // update nav links with data-en / data-ru
+  // update elements that use data-en / data-ru instead of data-lang
   document.querySelectorAll('[data-en]').forEach(el => {
     const en = el.getAttribute('data-en');
     const ru = el.getAttribute('data-ru');
-    if (lang === 'en' && en) el.textContent = en;
-    if (lang === 'ru' && ru) el.textContent = ru;
+    if (!ru) return;
+    el.textContent = (lang === 'en') ? en : ru;
   });
 }
 
-// set initial language on load
-setLang('en');
+// set default language
+document.addEventListener('DOMContentLoaded', () => {
+  setLang('en');
+});
+
