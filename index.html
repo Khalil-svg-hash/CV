@@ -171,7 +171,17 @@
       gap: 16px;
       flex-wrap: wrap;
     }
-    .btn-primary {
+
+    /* --- Animated "View Portfolio" button --- */
+    .btn-primary-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+
+    .btn-primary-wrapper .btn-primary {
+      position: relative;
+      z-index: 10;
+      /* keep original styles */
       display: inline-flex;
       align-items: center;
       gap: 8px;
@@ -185,46 +195,17 @@
       text-decoration: none;
       transition: all 0.25s;
     }
-    .btn-primary:hover {
+
+    .btn-primary-wrapper .btn-primary:hover {
       background: #d4b47e;
       transform: translateY(-1px);
     }
-    .btn-secondary {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid var(--border);
-      color: var(--muted);
-      padding: 14px 28px;
-      border-radius: 100px;
-      font-size: 13px;
-      letter-spacing: 0.05em;
-      text-decoration: none;
-      transition: all 0.25s;
-      cursor: pointer;
-      font-family: 'Inter', sans-serif;
-    }
-    .btn-secondary:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
 
-    /* ── ANIMATED "GET IN TOUCH" BUTTON ── */
-    .btn-secondary-wrapper {
-      position: relative;
-      display: inline-block;
-    }
-
-    .btn-secondary-wrapper .dropdown-toggle {
-      position: relative;
-      z-index: 2;
-    }
-
+    /* Shared layer styles */
     .btn-glow-layer {
       position: absolute;
       inset: 0;
-      z-index: 1;
+      z-index: 5;
       overflow: hidden;
       border-radius: 100px;
       filter: blur(3px);
@@ -243,16 +224,18 @@
       transition: transform 2000ms;
     }
 
+    /* Layer 1 – gold/orange/red mix */
     .glow-layer1 {
       --gradient: conic-gradient(transparent, var(--gold), transparent 20%, var(--orange) 40%, transparent 60%, var(--red) 80%, transparent);
     }
     .glow-layer1::before {
       --rotate: 60deg;
     }
-    .btn-secondary-wrapper:hover .glow-layer1::before {
+    .btn-primary-wrapper:hover .glow-layer1::before {
       --rotate: -120deg;
     }
 
+    /* Layer 2 – different distribution */
     .glow-layer2 {
       --gradient: conic-gradient(transparent, var(--orange), transparent 30%, var(--red) 50%, transparent 70%, var(--gold) 90%, transparent);
       filter: blur(3px) brightness(1.2);
@@ -260,10 +243,11 @@
     .glow-layer2::before {
       --rotate: 82deg;
     }
-    .btn-secondary-wrapper:hover .glow-layer2::before {
+    .btn-primary-wrapper:hover .glow-layer2::before {
       --rotate: -98deg;
     }
 
+    /* Layer 3 – brighter, more intense */
     .glow-layer3 {
       --gradient: conic-gradient(transparent, var(--red), transparent 10%, var(--gold) 30%, transparent 50%, var(--orange) 70%, transparent);
       filter: blur(3px) brightness(1.4);
@@ -271,7 +255,7 @@
     .glow-layer3::before {
       --rotate: 70deg;
     }
-    .btn-secondary-wrapper:hover .glow-layer3::before {
+    .btn-primary-wrapper:hover .glow-layer3::before {
       --rotate: -110deg;
     }
 
@@ -621,20 +605,37 @@
       vertical-align: middle;
     }
 
-    /* Dropdown styles (partially moved to .btn-secondary above) */
+    /* Dropdown styles (unchanged) */
     .dropdown-container {
       position: relative;
       display: inline-block;
     }
-
+    .dropdown-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 14px 28px;
+      border-radius: 100px;
+      font-size: 13px;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      transition: all 0.25s;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+    }
+    .dropdown-toggle:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
     .chevron-icon {
       transition: transform 0.4s ease;
     }
-
     .dropdown-container.open .chevron-icon {
       transform: rotate(180deg);
     }
-
     .dropdown-menu {
       position: absolute;
       z-index: 10;
@@ -651,13 +652,11 @@
       pointer-events: none;
       transition: opacity 0.3s ease, transform 0.3s ease;
     }
-
     .dropdown-container.open .dropdown-menu {
       opacity: 1;
       transform: translateY(0) scale(1);
       pointer-events: auto;
     }
-
     .dropdown-item {
       display: flex;
       align-items: center;
@@ -669,12 +668,10 @@
       font-size: 13px;
       transition: background-color 0.2s, color 0.2s;
     }
-
     .dropdown-item:hover {
       background-color: rgba(255,255,255,0.08);
       color: var(--text);
     }
-
     .dropdown-item .contact-icon-img {
       width: 22px;
       height: 22px;
@@ -682,18 +679,15 @@
       align-items: center;
       justify-content: center;
     }
-
     .dropdown-item .contact-icon-img img {
       width: 18px;
       height: 18px;
       object-fit: contain;
       opacity: 0.8;
     }
-
     .dropdown-item:hover .contact-icon-img img {
       opacity: 1;
     }
-
     @media (max-width: 768px) {
       .dropdown-menu {
         left: 0;
@@ -742,26 +736,27 @@
         <span data-lang="ru">Контент-менеджер и локализатор с 3+ годами опыта на стыке технологий, медиапродуктов и международных рынков. Участвовал в запуске Yango Play в регионе MENA. Прохожу магистратуру в МФТИ по направлению «Управление IT-продуктами».</span>
       </p>
       <div class="hero-cta">
-        <a href="portfolio.html" class="btn-primary">
-          <span data-lang="en">View Portfolio</span>
-          <span data-lang="ru">Портфолио</span>
-          →
-        </a>
+        <!-- Animated "View Portfolio" button -->
+        <div class="btn-primary-wrapper">
+          <a href="portfolio.html" class="btn-primary">
+            <span data-lang="en">View Portfolio</span>
+            <span data-lang="ru">Портфолио</span>
+            →
+          </a>
+          <div class="btn-glow-layer glow-layer1"></div>
+          <div class="btn-glow-layer glow-layer2"></div>
+          <div class="btn-glow-layer glow-layer3"></div>
+        </div>
 
-        <!-- Animated "Get in Touch" button -->
+        <!-- Dropdown container -->
         <div class="dropdown-container">
-          <div class="btn-secondary-wrapper">
-            <button class="dropdown-toggle btn-secondary" id="contactDropdownToggle">
-              <span data-lang="en">Get in Touch</span>
-              <span data-lang="ru">Написать</span>
-              <svg class="chevron-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </button>
-            <div class="btn-glow-layer glow-layer1"></div>
-            <div class="btn-glow-layer glow-layer2"></div>
-            <div class="btn-glow-layer glow-layer3"></div>
-          </div>
+          <button class="dropdown-toggle btn-secondary" id="contactDropdownToggle">
+            <span data-lang="en">Get in Touch</span>
+            <span data-lang="ru">Написать</span>
+            <svg class="chevron-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
           <div class="dropdown-menu" id="contactDropdownMenu">
             <a href="https://t.me/Simplykhalil" target="_blank" class="dropdown-item">
               <span class="contact-icon-img"><img src="Telegram.svg" alt="Telegram" /></span>
@@ -814,27 +809,22 @@
   </div>
 </div>
 
+<!-- Dropdown script (unchanged) -->
 <script>
-  // Dropdown functionality
   (function() {
     const dropdownContainer = document.querySelector('.dropdown-container');
     const dropdownToggle = document.getElementById('contactDropdownToggle');
     const dropdownMenu = document.getElementById('contactDropdownMenu');
-
     if (dropdownToggle && dropdownMenu) {
       dropdownToggle.addEventListener('click', function(e) {
         e.stopPropagation();
         dropdownContainer.classList.toggle('open');
       });
-
-      // Close when clicking outside
       document.addEventListener('click', function(e) {
         if (!dropdownContainer.contains(e.target)) {
           dropdownContainer.classList.remove('open');
         }
       });
-
-      // Close when clicking an option
       dropdownMenu.querySelectorAll('.dropdown-item').forEach(item => {
         item.addEventListener('click', function() {
           dropdownContainer.classList.remove('open');
@@ -844,7 +834,7 @@
   })();
 </script>
 
-<!-- EXPERIENCE -->
+<!-- EXPERIENCE (unchanged) -->
 <section>
   <div class="section-header">
     <div class="section-tag" data-lang="en">Work Experience</div>
@@ -855,8 +845,6 @@
     </h2>
   </div>
   <div class="cards-grid">
-
-
     <div class="frosted-card" data-tilt>
       <div class="card-icon-img"><img src="Yandex.svg" alt="Yandex / KinoPoisk" style="filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.6));" /></div>
       <div class="card-label">Oct 2023 — Present</div>
@@ -880,8 +868,6 @@
         </ul>
       </div>
     </div>
-
-
     <div class="frosted-card" data-tilt>
       <div class="card-icon-img"><img src="Merlin.svg" alt="Merlin"/></div>
       <div class="card-label">Jan 2025 — Jul 2025 · Part-time</div>
@@ -899,8 +885,6 @@
         </ul>
       </div>
     </div>
-
-
     <div class="frosted-card" data-tilt>
       <div class="card-icon-img"><img src="rufilms.svg" alt="RuFilms"/></div>
       <div class="card-label">Oct 2019 — Sep 2022 · Part-time</div>
@@ -920,16 +904,12 @@
         </ul>
       </div>
     </div>
-
-
   </div>
 </section>
 
-
 <div class="divider"></div>
 
-
-<!-- EDUCATION -->
+<!-- EDUCATION (unchanged) -->
 <section>
   <div class="section-header">
     <div class="section-tag" data-lang="en">Education</div>
@@ -941,7 +921,7 @@
   </div>
   <div class="cards-grid">
     <div class="frosted-card" data-tilt>
-      <div class="card-icon-img"><img src="mipt.svg" alt="Yandex / KinoPoisk" /></div>
+      <div class="card-icon-img"><img src="mipt.svg" alt="MIPT" /></div>
       <div class="card-label">2025 — 2027</div>
       <div class="card-title">MIPT</div>
       <div class="card-sub" data-lang="en">Moscow Institute of Physics and Technology</div>
@@ -952,7 +932,7 @@
       </div>
     </div>
     <div class="frosted-card" data-tilt>
-      <div class="card-icon-img"><img src="spbpu.svg" alt="Yandex / KinoPoisk" /></div>
+      <div class="card-icon-img"><img src="spbpu.svg" alt="SPbPU" /></div>
       <div class="card-label">2019 — 2023</div>
       <div class="card-title">SPbPU</div>
       <div class="card-sub" data-lang="en">Peter the Great St. Petersburg Polytechnic University</div>
@@ -967,7 +947,7 @@
 
 <div class="divider"></div>
 
-<!-- SKILLS -->
+<!-- SKILLS (unchanged) -->
 <section>
   <div class="section-header">
     <div class="section-tag" data-lang="en">Skills & Tools</div>
@@ -1036,53 +1016,47 @@
   <div style="margin-top: 48px;">
     <div class="section-tag" data-lang="en">Languages</div>
     <div class="section-tag" data-lang="ru">Языки</div>
-<div class="langs-row">
-  <div class="lang-pill">
-    <img src="Saudi_Arabia.svg" alt="AR" style="width: 28px !important; height: 28px !important; border-radius: 50%; object-fit: cover; flex-shrink: 0;">
-    <div>
-      <div class="lang-name" data-lang="en">Arabic</div>
-      <div class="lang-name" data-lang="ru">Арабский</div>
-      <div class="lang-level" data-lang="en">Native</div>
-      <div class="lang-level" data-lang="ru">Родной</div>
+    <div class="langs-row">
+      <div class="lang-pill">
+        <img src="Saudi_Arabia.svg" alt="AR" style="width: 28px !important; height: 28px !important; border-radius: 50%; object-fit: cover; flex-shrink: 0;">
+        <div>
+          <div class="lang-name" data-lang="en">Arabic</div>
+          <div class="lang-name" data-lang="ru">Арабский</div>
+          <div class="lang-level" data-lang="en">Native</div>
+          <div class="lang-level" data-lang="ru">Родной</div>
+        </div>
+      </div>
+      <div class="lang-pill">
+        <img src="uk.svg" alt="EN" style="width: 28px !important; height: 28px !important; border-radius: 50%; object-fit: cover; flex-shrink: 0;">
+        <div>
+          <div class="lang-name">English</div>
+          <div class="lang-level">C2</div>
+        </div>
+      </div>
+      <div class="lang-pill">
+        <img src="Russia.svg" alt="RU" style="width: 28px !important; height: 28px !important; border-radius: 50%; object-fit: cover; flex-shrink: 0;">
+        <div>
+          <div class="lang-name" data-lang="en">Russian</div>
+          <div class="lang-name" data-lang="ru">Русский</div>
+          <div class="lang-level">C1/C2</div>
+        </div>
+      </div>
+      <div class="lang-pill">
+        <img src="china.svg" alt="ZH" style="width: 28px !important; height: 28px !important; border-radius: 50%; object-fit: cover; flex-shrink: 0;">
+        <div>
+          <div class="lang-name" data-lang="en">Chinese</div>
+          <div class="lang-name" data-lang="ru">Китайский</div>
+          <div class="lang-level">A1</div>
+        </div>
+      </div>
     </div>
-  </div>
-  
-  <div class="lang-pill">
-    <img src="uk.svg" alt="EN" style="width: 28px !important; height: 28px !important; border-radius: 50%; object-fit: cover; flex-shrink: 0;">
-    <div>
-      <div class="lang-name">English</div>
-      <div class="lang-level">C2</div>
-    </div>
-  </div>
-  
-  <div class="lang-pill">
-    <img src="Russia.svg" alt="RU" style="width: 28px !important; height: 28px !important; border-radius: 50%; object-fit: cover; flex-shrink: 0;">
-    <div>
-      <div class="lang-name" data-lang="en">Russian</div>
-      <div class="lang-name" data-lang="ru">Русский</div>
-      <div class="lang-level">C1/C2</div>
-    </div>
-  </div>
-  
-  <div class="lang-pill">
-    <img src="china.svg" alt="ZH" style="width: 28px !important; height: 28px !important; border-radius: 50%; object-fit: cover; flex-shrink: 0;">
-    <div>
-      <div class="lang-name" data-lang="en">Chinese</div>
-      <div class="lang-name" data-lang="ru">Китайский</div>
-      <div class="lang-level">A1</div>
-    </div>
-  </div>
-</div>
-
-
   </div>
 </section>
 
 <div class="divider"></div>
 
-<!-- CONTACT -->
+<!-- CONTACT (unchanged) -->
 <section id="contact">
-
   <div class="section-header">
     <div class="section-tag" data-lang="en">Contact</div>
     <div class="section-tag" data-lang="ru">Контакты</div>
@@ -1092,17 +1066,14 @@
     </h2>
   </div>
   <div class="contact-row">
-  
-<a href="mailto:khalilforwork@gmail.com" class="contact-card">
-  <span class="contact-icon-img"><img src="gmail.svg" alt="Email" /></span>
-  <span>Gmail</span>
-</a>
-
-<a href="mailto:simplykhalil@yandex.ru" class="contact-card">
-  <span class="contact-icon-img"><img src="Yandex_mail.svg" alt="Yandex Mail" /></span>
-  <span>Yandex Mail</span>
-</a>
-
+    <a href="mailto:khalilforwork@gmail.com" class="contact-card">
+      <span class="contact-icon-img"><img src="gmail.svg" alt="Email" /></span>
+      <span>Gmail</span>
+    </a>
+    <a href="mailto:simplykhalil@yandex.ru" class="contact-card">
+      <span class="contact-icon-img"><img src="Yandex_mail.svg" alt="Yandex Mail" /></span>
+      <span>Yandex Mail</span>
+    </a>
     <a href="https://t.me/Simplykhalil" target="_blank" class="contact-card">
       <span class="contact-icon-img"><img src="Telegram.svg" alt="Telegram" /></span>
       <span>@Simplykhalil</span>
@@ -1115,7 +1086,8 @@
   <span data-lang="ru">© 2025 Шараф Халиль · Москва · Готов к переезду и командировкам</span>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script>
 // ──────────────────────────────────────
 // SHADER (WebGL) — adapted from 21dev
 // ──────────────────────────────────────
