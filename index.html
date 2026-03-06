@@ -210,7 +210,7 @@
       color: var(--accent);
     }
 
-    /* ── ANIMATED "GET IN TOUCH" BUTTON ── */
+    /* ── ANIMATED "GET IN TOUCH" BUTTON (EDGE GLOW) ── */
     .btn-secondary-wrapper {
       position: relative;
       display: inline-block;
@@ -219,16 +219,23 @@
     .btn-secondary-wrapper .dropdown-toggle {
       position: relative;
       z-index: 2;
+      background: rgba(255,255,255,0.04); /* keep original */
+      border: 1px solid var(--border);
+      color: var(--muted);
+      /* other styles inherited from .btn-secondary */
     }
 
     .btn-glow-layer {
       position: absolute;
-      inset: 0;
       z-index: 1;
-      overflow: hidden;
-      border-radius: 100px;
-      filter: blur(3px);
+      width: calc(100% + 20px);  /* extend 10px beyond each edge */
+      height: calc(100% + 20px);
+      top: -10px;
+      left: -10px;
+      border-radius: inherit;     /* match button's border-radius (100px) */
+      filter: blur(4px);          /* slightly more blur for softer edge */
       pointer-events: none;
+      overflow: visible;
     }
 
     .btn-glow-layer::before {
@@ -255,7 +262,7 @@
 
     .glow-layer2 {
       --gradient: conic-gradient(transparent, var(--orange), transparent 30%, var(--red) 50%, transparent 70%, var(--gold) 90%, transparent);
-      filter: blur(3px) brightness(1.2);
+      filter: blur(4px) brightness(1.2);
     }
     .glow-layer2::before {
       --rotate: 82deg;
@@ -266,7 +273,7 @@
 
     .glow-layer3 {
       --gradient: conic-gradient(transparent, var(--red), transparent 10%, var(--gold) 30%, transparent 50%, var(--orange) 70%, transparent);
-      filter: blur(3px) brightness(1.4);
+      filter: blur(4px) brightness(1.4);
     }
     .glow-layer3::before {
       --rotate: 70deg;
@@ -570,7 +577,6 @@
     .hero-cta { animation: fadeUp 0.6s 0.4s ease both; }
     .portrait-card { animation: fadeUp 0.8s 0.2s ease both; }
 
-
     /* ── CARD LOGO (svg/img) ── */
     .card-icon-img {
       width: 100%;
@@ -607,7 +613,6 @@
     .contact-card:hover .contact-icon-img img { opacity: 1; }
 
     /* Flag emoji keep as-is (no SVG provided) */
-
     .lang-flag-txt {
       display: inline-block;
       font-size: 9px;
@@ -621,7 +626,7 @@
       vertical-align: middle;
     }
 
-    /* Dropdown styles (partially moved to .btn-secondary above) */
+    /* Dropdown styles */
     .dropdown-container {
       position: relative;
       display: inline-block;
@@ -748,7 +753,7 @@
           →
         </a>
 
-        <!-- Animated "Get in Touch" button -->
+        <!-- Animated "Get in Touch" button with edge glow -->
         <div class="dropdown-container">
           <div class="btn-secondary-wrapper">
             <button class="dropdown-toggle btn-secondary" id="contactDropdownToggle">
