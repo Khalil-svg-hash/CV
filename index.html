@@ -456,6 +456,7 @@
       flex-wrap: wrap;
       margin-top: 48px;
     }
+    .stat-item {}
     .stat-num {
       font-family: 'Cormorant Garamond', serif;
       font-size: 48px;
@@ -1190,8 +1191,16 @@ function setLang(lang){
     el.style.display = el.getAttribute('data-lang') === lang ? '' : 'none';
   });
 
-    // Handle [data-en] / [data-ru] attributes on nav links
-    document.querySelectorAll('[data-en][data-ru]').forEach(el => {
-      el.textContent = lang === 'en' ? el.getAttribute('data-en') : el.getAttribute('data-ru');
-    });
-  }
+  // Handle [data-en] / [data-ru] attributes on nav links
+  document.querySelectorAll('[data-en][data-ru]').forEach(el => {
+    el.textContent = lang === 'en' ? el.getAttribute('data-en') : el.getAttribute('data-ru');
+  });
+
+  localStorage.setItem('lang', lang);
+}
+
+// Initialize language on page load
+setLang(localStorage.getItem('lang') || 'en');
+</script>
+</body>
+</html>
