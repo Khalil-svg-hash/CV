@@ -1031,19 +1031,24 @@
 <div class="divider"></div>
 
 <!-- CONTACT -->
-<sectitle">
+<section id="contact">
+
+  <div class="section-header">
+    <div class="section-tag" data-lang="en">Contact</div>
+    <div class="section-tag" data-lang="ru">Контакты</div>
+    <h2 class="section-title">
       <span data-lang="en">Let's Work Together</span>
       <span data-lang="ru">Свяжитесь со мной</span>
     </h2>
   </div>
   <div class="contact-row">
   
-<a href="mailto:khalilforwork@gmail.com" class="contact-card">
+<a href="/cdn-cgi/l/email-protection#88e3e0e9e4e1e4eee7faffe7fae3c8efe5e9e1e4a6ebe7e5" class="contact-card">
   <span class="contact-icon-img"><img src="gmail.svg" alt="Email" /></span>
   <span>Gmail</span>
 </a>
 
-<a href="mailto:simplykhalil@yandex.ru" class="contact-card">
+<a href="/cdn-cgi/l/email-protection#35465c5845594c5e5d54595c59754c545b51504d1b4740" class="contact-card">
   <span class="contact-icon-img"><img src="Yandex_mail.svg" alt="Yandex Mail" /></span>
   <span>Yandex Mail</span>
 </a>
@@ -1060,7 +1065,7 @@
   <span data-lang="ru">© 2025 Халиль Шараф · Москва · Готов к релокации и командировкам</span>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ──────────────────────────────────────
 // SHADER (WebGL) — adapted from 21dev
 // ──────────────────────────────────────
@@ -1186,16 +1191,8 @@ function setLang(lang){
     el.style.display = el.getAttribute('data-lang') === lang ? '' : 'none';
   });
 
-  // Handle [data-en] / [data-ru] attributes on nav links
-  document.querySelectorAll('[data-en][data-ru]').forEach(el => {
-    el.textContent = lang === 'en' ? el.getAttribute('data-en') : el.getAttribute('data-ru');
-  });
-
-  localStorage.setItem('lang', lang);
-}
-
-// Initialize language on page load
-setLang(localStorage.getItem('lang') || 'en');
-</script>
-</body>
-</html>
+    // Handle [data-en] / [data-ru] attributes on nav links
+    document.querySelectorAll('[data-en][data-ru]').forEach(el => {
+      el.textContent = lang === 'en' ? el.getAttribute('data-en') : el.getAttribute('data-ru');
+    });
+  }
