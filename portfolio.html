@@ -105,7 +105,6 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s;
       will-change: transform;
     }
-    .pcard.has-gallery { overflow: visible; }
     .pcard:hover {
       transform: translateY(-8px);
       box-shadow: 0 30px 70px rgba(0,0,0,0.5);
@@ -245,45 +244,61 @@
     .page-title { animation: fadeUp 0.5s 0.1s ease both; }
     .page-sub { animation: fadeUp 0.5s 0.2s ease both; }
 
-    /* ── KARETA POP-OUT GALLERY ── */
-    .kareta-gallery {
+    /* ── KARETA INFINITE SLIDER ── */
+    .kareta-slider-wrap {
       position: absolute;
       inset: 0;
-      z-index: 10;
-      pointer-events: none;
-      overflow: visible;
-    }
-    .kpop {
-      position: absolute;
-      width: 52%;
-      aspect-ratio: 4/3;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.08);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 10px;
       opacity: 0;
+      transition: opacity 0.4s ease;
       pointer-events: none;
-      transition: opacity 0.35s ease, transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+      padding: 0;
+      overflow: hidden;
     }
-    .kpop img {
-      width: 100%; height: 100%;
+    .pcard:hover .kareta-slider-wrap {
+      opacity: 1;
+    }
+    .kareta-track-row {
+      display: flex;
+      width: max-content;
+      gap: 10px;
+      will-change: transform;
+    }
+    .kareta-track-row.row-1 {
+      animation: slider-left 18s linear infinite;
+    }
+    .kareta-track-row.row-2 {
+      animation: slider-right 22s linear infinite;
+    }
+    .pcard:hover .kareta-track-row {
+      animation-play-state: running;
+    }
+    .kareta-slide {
+      width: 130px;
+      height: 90px;
+      border-radius: 8px;
+      overflow: hidden;
+      flex-shrink: 0;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+    }
+    .kareta-slide img {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       display: block;
     }
-    /* Resting positions (before hover — pulled inward) */
-    .kpop-1 { top: -8%; left: -4%;  transform: translate(-60px, 40px) rotate(-6deg) scale(0.82); }
-    .kpop-2 { top: 10%; right: -4%; transform: translate(60px, -20px) rotate(5deg)  scale(0.82); }
-    .kpop-3 { bottom: -8%; left: 18%; transform: translate(0px, 60px)  rotate(-2deg) scale(0.82); }
-
-    /* Hover — pop out and spread */
-    .pcard:hover .kpop { opacity: 1; }
-    .pcard:hover .kpop-1 { transform: translate(-72px, -28px) rotate(-8deg)  scale(1); }
-    .pcard:hover .kpop-2 { transform: translate(72px,  -18px) rotate(7deg)   scale(1); }
-    .pcard:hover .kpop-3 { transform: translate(4px,   72px)  rotate(-3deg)  scale(1); }
-
-    /* Stagger delays */
-    .kpop-1 { transition-delay: 0s;     }
-    .kpop-2 { transition-delay: 0.05s;  }
-    .kpop-3 { transition-delay: 0.10s;  }
+    @keyframes slider-left {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    @keyframes slider-right {
+      0%   { transform: translateX(-50%); }
+      100% { transform: translateX(0); }
+    }
   </style>
 </head>
 <body>
@@ -339,16 +354,46 @@
       </div>
     </div>
 
-    <!-- Card 2 -->
-    <div class="pcard has-gallery" data-tilt id="kareta-card">
-      <!-- inner clip so card contents stay rounded -->
-      <div style="position:absolute;inset:0;border-radius:20px;overflow:hidden;z-index:0;">
-        <div class="pcard-bg-txt">K</div>
-        <div class="pcard-overlay"></div>
+    <!-- Card 2 — Kareta with infinite slider -->
+    <div class="pcard" data-tilt>
+      <div class="pcard-bg-txt">K</div>
+
+      <!-- Infinite photo slider (visible on hover) -->
+      <div class="kareta-slider-wrap">
+        <!-- Row 1: left -->
+        <div class="kareta-track-row row-1">
+          <div class="kareta-slide"><img src="kareta_preview_1.svg" alt="" /></div>
+          <div class="kareta-slide"><img src="kareta_preview_2.svg" alt="" /></div>
+          <div class="kareta-slide"><img src="kareta_preview_3.svg" alt="" /></div>
+          <div class="kareta-slide"><img src="kareta_preview_4.svg" alt="" /></div>
+          <div class="kareta-slide"><img src="kareta_preview_5.svg" alt="" /></div>
+          <!-- duplicate for seamless loop -->
+          <div class="kareta-slide"><img src="kareta_preview_1.svg" alt="" /></div>
+          <div class="kareta-slide"><img src="kareta_preview_2.svg" alt="" /></div>
+          <div class="kareta-slide"><img src="kareta_preview_3.svg" alt="" /></div>
+          <div class="kareta-slide"><img src="kareta_preview_4.svg" alt="" /></div>
+          <div class="kareta-slide"><img src="kareta_preview_5.svg" alt="" /></div>
+        </div>
+        <!-- Row 2: right (reverse) -->
+        <div class="kareta-track-row row-2">
+          <div class="kareta-slide"><img src="kareta_preview_3.svg" alt="" /></div>
+          <div class="kareta-slide"><img src="kareta_preview_5.svg" alt="" /></div>
+          <div class="kareta-slide"><img src="kareta_preview_1.svg" alt="" /></div>
+          <div class="kareta-slide"><img src="kareta_preview_4.svg" alt="" /></div>
+          <div class="kareta-slide"><img src="kareta_preview_2.svg" alt="" /></div>
+          <!-- duplicate -->
+          <div class="kareta-slide"><img src="kareta_preview_3.svg" alt="" /></div>
+          <div class="kareta-slide"><img src="kareta_preview_5.svg" alt="" /></div>
+          <div class="kareta-slide"><img src="kareta_preview_1.svg" alt="" /></div>
+          <div class="kareta-slide"><img src="kareta_preview_4.svg" alt="" /></div>
+          <div class="kareta-slide"><img src="kareta_preview_2.svg" alt="" /></div>
+        </div>
       </div>
-      <div class="pcard-logo" style="z-index:2;"><span class="pcard-logo-txt">Kareta</span></div>
-      <div class="pcard-meta" style="z-index:2;">2025 — 2026</div>
-      <div class="pcard-content" style="z-index:2;">
+
+      <div class="pcard-overlay"></div>
+      <div class="pcard-logo"><span class="pcard-logo-txt">Kareta</span></div>
+      <div class="pcard-meta">2025 — 2026</div>
+      <div class="pcard-content">
         <div class="pcard-tag" data-lang="en">Startup · Mobility</div>
         <div class="pcard-tag" data-lang="ru">Стартап · Мобильность</div>
         <div class="pcard-title">Kareta</div>
@@ -356,12 +401,6 @@
           <span data-lang="en">Founded and operated a ride-sharing startup from concept to MVP. Advanced to the finals of MIPT's Phystech.Idea accelerator program — a federal-level competition for technology ventures.</span>
           <span data-lang="ru">Основал стартап в сфере райдшеринга и довёл его от идеи до MVP. Вышел в финал акселератора МФТИ «Физтех.Идея» — федерального конкурса технологических проектов.</span>
         </p>
-      </div>
-      <!-- Pop-out gallery (overflows the card) -->
-      <div class="kareta-gallery">
-        <div class="kpop kpop-1"><img src="kareta_preview_1.svg" alt="Kareta 1" /></div>
-        <div class="kpop kpop-2"><img src="kareta_preview_2.svg" alt="Kareta 2" /></div>
-        <div class="kpop kpop-3"><img src="kareta_preview_3.svg" alt="Kareta 3" /></div>
       </div>
     </div>
 
