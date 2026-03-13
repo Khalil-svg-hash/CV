@@ -250,13 +250,11 @@
       inset: 0;
       z-index: 2;
       display: flex;
-      flex-direction: column;
+      align-items: center;
       justify-content: center;
-      gap: 10px;
       opacity: 0;
       transition: opacity 0.4s ease;
       pointer-events: none;
-      padding: 0;
       overflow: hidden;
     }
     .pcard:hover .kareta-slider-wrap {
@@ -265,39 +263,36 @@
     .kareta-track-row {
       display: flex;
       width: max-content;
-      gap: 10px;
-      will-change: transform;
-    }
-    .kareta-track-row.row-1 {
-      animation: slider-left 18s linear infinite;
-    }
-    .kareta-track-row.row-2 {
-      animation: slider-right 22s linear infinite;
-    }
-    .pcard:hover .kareta-track-row {
-      animation-play-state: running;
+      gap: 12px;
+      animation: slider-left 20s linear infinite;
     }
     .kareta-slide {
-      width: 130px;
-      height: 90px;
-      border-radius: 8px;
+      height: 160px;
+      width: auto;
+      border-radius: 10px;
       overflow: hidden;
       flex-shrink: 0;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.6);
     }
     .kareta-slide img {
-      width: 100%;
       height: 100%;
-      object-fit: cover;
+      width: auto;
       display: block;
+      object-fit: contain;
     }
     @keyframes slider-left {
       0%   { transform: translateX(0); }
       100% { transform: translateX(-50%); }
     }
-    @keyframes slider-right {
-      0%   { transform: translateX(-50%); }
-      100% { transform: translateX(0); }
+
+    /* Text blur on Kareta card hover */
+    .pcard:hover .kareta-blur {
+      filter: blur(6px);
+      opacity: 0.15;
+      transition: filter 0.4s ease, opacity 0.4s ease;
+    }
+    .kareta-blur {
+      transition: filter 0.4s ease, opacity 0.4s ease;
     }
   </style>
 </head>
@@ -356,44 +351,29 @@
 
     <!-- Card 2 — Kareta with infinite slider -->
     <div class="pcard" data-tilt>
-      <div class="pcard-bg-txt">K</div>
+      <div class="pcard-bg-txt kareta-blur">K</div>
 
-      <!-- Infinite photo slider (visible on hover) -->
+      <!-- Single-row infinite photo slider (visible on hover) -->
       <div class="kareta-slider-wrap">
-        <!-- Row 1: left -->
-        <div class="kareta-track-row row-1">
+        <div class="kareta-track-row">
           <div class="kareta-slide"><img src="kareta_preview_1.svg" alt="" /></div>
           <div class="kareta-slide"><img src="kareta_preview_2.svg" alt="" /></div>
           <div class="kareta-slide"><img src="kareta_preview_3.svg" alt="" /></div>
           <div class="kareta-slide"><img src="kareta_preview_4.svg" alt="" /></div>
           <div class="kareta-slide"><img src="kareta_preview_5.svg" alt="" /></div>
-          <!-- duplicate for seamless loop -->
+          <!-- duplicates for seamless loop -->
           <div class="kareta-slide"><img src="kareta_preview_1.svg" alt="" /></div>
           <div class="kareta-slide"><img src="kareta_preview_2.svg" alt="" /></div>
           <div class="kareta-slide"><img src="kareta_preview_3.svg" alt="" /></div>
           <div class="kareta-slide"><img src="kareta_preview_4.svg" alt="" /></div>
           <div class="kareta-slide"><img src="kareta_preview_5.svg" alt="" /></div>
-        </div>
-        <!-- Row 2: right (reverse) -->
-        <div class="kareta-track-row row-2">
-          <div class="kareta-slide"><img src="kareta_preview_3.svg" alt="" /></div>
-          <div class="kareta-slide"><img src="kareta_preview_5.svg" alt="" /></div>
-          <div class="kareta-slide"><img src="kareta_preview_1.svg" alt="" /></div>
-          <div class="kareta-slide"><img src="kareta_preview_4.svg" alt="" /></div>
-          <div class="kareta-slide"><img src="kareta_preview_2.svg" alt="" /></div>
-          <!-- duplicate -->
-          <div class="kareta-slide"><img src="kareta_preview_3.svg" alt="" /></div>
-          <div class="kareta-slide"><img src="kareta_preview_5.svg" alt="" /></div>
-          <div class="kareta-slide"><img src="kareta_preview_1.svg" alt="" /></div>
-          <div class="kareta-slide"><img src="kareta_preview_4.svg" alt="" /></div>
-          <div class="kareta-slide"><img src="kareta_preview_2.svg" alt="" /></div>
         </div>
       </div>
 
-      <div class="pcard-overlay"></div>
-      <div class="pcard-logo"><span class="pcard-logo-txt">Kareta</span></div>
-      <div class="pcard-meta">2025 — 2026</div>
-      <div class="pcard-content">
+      <div class="pcard-overlay kareta-blur"></div>
+      <div class="pcard-logo kareta-blur"><span class="pcard-logo-txt">Kareta</span></div>
+      <div class="pcard-meta kareta-blur">2025 — 2026</div>
+      <div class="pcard-content kareta-blur">
         <div class="pcard-tag" data-lang="en">Startup · Mobility</div>
         <div class="pcard-tag" data-lang="ru">Стартап · Мобильность</div>
         <div class="pcard-title">Kareta</div>
