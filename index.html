@@ -3,10 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preload" as="image" href="portrait.webp" type="image/webp" fetchpriority="high" />
   <title>Khalil Sharaf — Product & Project Manager</title>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Khalil Sharaf — Product & Project Manager</title>
+
+<!-- Favicon -->
+<link rel="icon" type="image/jpeg" href="favicon.jpg">
+<link rel="apple-touch-icon" href="favicon.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
+
     :root {
       --bg: #080808;
       --surface: rgba(255,255,255,0.04);
@@ -641,22 +653,24 @@
       </div>
     </div>
 
-    <div class="portrait-wrap">
-      <div class="portrait-card" id="portrait3d">
-        <img src="portrait.jpg" alt="Khalil Sharaf" />
-        <div class="portrait-overlay"></div>
-        <div class="portrait-badge">
-          <div class="portrait-badge-title" data-lang="en">Available for hire</div>
-          <div class="portrait-badge-title" data-lang="ru">Рассматриваю предложения</div>
-          <div class="portrait-badge-text">
-            <span data-lang="en">Moscow · Remote · Hybrid · On Site</span>
-            <span data-lang="ru">Москва · Удаленно · Гибрид · В офисе</span>
-          </div>
-        </div>
+<div class="portrait-wrap">
+  <div class="portrait-card" id="portrait3d">
+    <picture>
+      <source srcset="portrait.webp" type="image/webp">
+      <img src="portrait.jpg" alt="Khalil Sharaf" fetchpriority="high" />
+    </picture>
+    <div class="portrait-overlay"></div>
+    <div class="portrait-badge">
+      <div class="portrait-badge-title" data-lang="en">Available for hire</div>
+      <div class="portrait-badge-title" data-lang="ru">Рассматриваю предложения</div>
+      <div class="portrait-badge-text">
+        <span data-lang="en">Moscow · Remote · Hybrid · On Site</span>
+        <span data-lang="ru">Москва · Удаленно · Гибрид · В офисе</span>
       </div>
     </div>
   </div>
 </div>
+
 
 <!-- Add these styles to your existing CSS (in the <style> block) -->
 <style>
