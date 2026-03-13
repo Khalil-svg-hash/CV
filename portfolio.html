@@ -243,6 +243,29 @@
     .page-tag { animation: fadeUp 0.5s ease both; }
     .page-title { animation: fadeUp 0.5s 0.1s ease both; }
     .page-sub { animation: fadeUp 0.5s 0.2s ease both; }
+
+    /* ── HOVER PREVIEW IMAGE ── */
+    .pcard-preview {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.45s ease;
+    }
+    .pcard-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.06);
+      transition: transform 0.55s ease;
+    }
+    .pcard:hover .pcard-preview {
+      opacity: 1;
+    }
+    .pcard:hover .pcard-preview img {
+      transform: scale(1.0);
+    }
   </style>
 </head>
 <body>
@@ -301,6 +324,7 @@
     <!-- Card 2 -->
     <div class="pcard" data-tilt>
       <div class="pcard-bg-txt">K</div>
+      <div class="pcard-preview"><img src="kareta_preview.svg" alt="Kareta preview" /></div>
       <div class="pcard-logo"><span class="pcard-logo-txt">Kareta</span></div>
       <div class="pcard-overlay"></div>
       <div class="pcard-meta">2025 — 2026</div>
