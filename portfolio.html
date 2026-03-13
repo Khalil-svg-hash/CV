@@ -251,7 +251,7 @@
       z-index: 2;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       opacity: 0;
       transition: opacity 0.4s ease;
       pointer-events: none;
@@ -262,27 +262,29 @@
     }
     .kareta-track-row {
       display: flex;
-      width: max-content;
+      flex-shrink: 0;
       gap: 12px;
-      animation: slider-left 20s linear infinite;
+      animation: slider-left 10s linear infinite;
+      padding: 0 6px;
     }
     .kareta-slide {
-      height: 160px;
-      width: auto;
+      width: 90px;
+      height: 180px;
       border-radius: 10px;
       overflow: hidden;
       flex-shrink: 0;
       box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+      background: #1a1a1a;
     }
     .kareta-slide img {
+      width: 100%;
       height: 100%;
-      width: auto;
       display: block;
-      object-fit: contain;
+      object-fit: cover;
     }
     @keyframes slider-left {
       0%   { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+      100% { transform: translateX(calc(-5 * (90px + 12px))); }
     }
 
     /* Text blur on Kareta card hover */
@@ -356,12 +358,13 @@
       <!-- Single-row infinite photo slider (visible on hover) -->
       <div class="kareta-slider-wrap">
         <div class="kareta-track-row">
+          <!-- originals 1–5 -->
           <div class="kareta-slide"><img src="kareta_preview_1.svg" alt="" /></div>
           <div class="kareta-slide"><img src="kareta_preview_2.svg" alt="" /></div>
           <div class="kareta-slide"><img src="kareta_preview_3.svg" alt="" /></div>
           <div class="kareta-slide"><img src="kareta_preview_4.svg" alt="" /></div>
           <div class="kareta-slide"><img src="kareta_preview_5.svg" alt="" /></div>
-          <!-- duplicates for seamless loop -->
+          <!-- exact duplicates 1–5 for seamless loop -->
           <div class="kareta-slide"><img src="kareta_preview_1.svg" alt="" /></div>
           <div class="kareta-slide"><img src="kareta_preview_2.svg" alt="" /></div>
           <div class="kareta-slide"><img src="kareta_preview_3.svg" alt="" /></div>
