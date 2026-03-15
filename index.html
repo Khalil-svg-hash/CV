@@ -4,6 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Khalil Sharaf — Product & Project Manager</title>
+  <script>
+    (function(){
+      const lang = localStorage.getItem('lang') || 'en';
+      document.documentElement.setAttribute('data-active-lang', lang);
+    })();
+  </script>
 
   <!-- Favicon -->
   <link rel="icon" href="favicon.ico" sizes="any">
@@ -31,6 +37,11 @@
       --accent2: #7eb8c9;
       --radius: 16px;
     }
+    /* Language visibility — hide all by default, show active lang only */
+    [data-lang] { display: none; }
+    [data-active-lang="en"] [data-lang="en"] { display: revert; }
+    [data-active-lang="ru"] [data-lang="ru"] { display: revert; }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
@@ -1200,13 +1211,9 @@
 // LANGUAGE SWITCHER
 // ──────────────────────────────────────
 function setLang(lang){
+  document.documentElement.setAttribute('data-active-lang', lang);
   document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
   document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
-
-  // Handle [data-lang] elements
-  document.querySelectorAll('[data-lang]').forEach(el => {
-    el.style.display = el.getAttribute('data-lang') === lang ? '' : 'none';
-  });
 
   // Handle [data-en] / [data-ru] attributes on nav links
   document.querySelectorAll('[data-en][data-ru]').forEach(el => {
