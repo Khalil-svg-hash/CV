@@ -110,13 +110,15 @@
       box-shadow: 0 30px 70px rgba(0,0,0,0.5);
       border-color: rgba(201,169,110,0.4);
     }
-    .pcard-bg {
-      position: absolute; inset: 0;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 80px; opacity: 0.15;
-      background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
-      transition: opacity 0.3s;
-    }
+    .pcard-bg-txt {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 72px; font-weight: 700;
+  font-family: 'Segoe UI', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-style: italic;
+  color: rgba(255,255,255,0.05); letter-spacing: -0.02em;
+  transition: color 0.4s; user-select: none;
+}
     .pcard:hover .pcard-bg { opacity: 0.25; }
     .pcard-overlay {
       position: absolute; inset: 0;
@@ -378,7 +380,7 @@
     </div>
 
     <div class="pcard">
-      <div class="pcard-bg-txt kareta-blur">K</div>
+      <div class="pcard-bg-txt kareta-blur">Kareta</div>
 
       <div class="kareta-slider-wrap">
         <div class="kareta-track-row">
