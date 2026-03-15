@@ -214,20 +214,21 @@
     .pcard:hover .pcard-bg-txt { color: rgba(255,255,255,0.09); }
     /* Visible logo badge */
     .pcard-logo {
-      position: absolute; top: 20px; left: 22px; z-index: 3;
-      display: flex; align-items: center; height: 34px;
-    }
+  position: absolute; top: 20px; left: 50%; transform: translateX(-50%); z-index: 3;
+  display: flex; align-items: center; height: 34px;
+}
     .pcard-logo img {
-      max-height: 26px; max-width: 100px; width: auto; object-fit: contain;
-      opacity: 0.8; transition: opacity 0.3s;
-      filter: drop-shadow(0 1px 5px rgba(0,0,0,0.7));
-    }
+  height: 32px; width: 120px; object-fit: contain;
+  opacity: 0.8; transition: opacity 0.3s;
+  filter: drop-shadow(0 1px 5px rgba(0,0,0,0.7));
+}
     .pcard:hover .pcard-logo img { opacity: 1; }
     .pcard-logo-txt {
-      font-size: 9px; font-weight: 700; letter-spacing: 0.16em;
-      text-transform: uppercase; color: rgba(240,237,232,0.45);
-      transition: color 0.3s; text-shadow: 0 1px 5px rgba(0,0,0,0.8);
-    }
+  font-size: 9px; font-weight: 700; letter-spacing: 0.16em;
+  text-transform: uppercase; color: rgba(240,237,232,0.45);
+  transition: color 0.3s; text-shadow: 0 1px 5px rgba(0,0,0,0.8);
+  text-align: center;
+}
     .pcard:hover .pcard-logo-txt { color: rgba(240,237,232,0.85); }
     /* Cert award icon */
     .cert-icon { flex-shrink:0; width:22px; height:22px; margin-top:2px; opacity:0.5; }
@@ -303,15 +304,14 @@
 
     /* ── NEW CLICK ME ICON ── */
     .pcard-click-icon {
-      position: absolute;
-      top: 10x; /* Vertically aligns with the logo and date */
-      left: 50%; /* Centers it perfectly between left and right */
-      transform: translateX(-50%);
-      z-index: 3;
-      height: 48px; /* Keeps it small, matching the text size */
-      opacity: 0.6;
-      transition: opacity 0.3s ease;
-    }
+  position: absolute;
+  top: 16px;
+  left: 18px;
+  z-index: 3;
+  height: 48px;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
     .pcard-click-icon img {
       height: 100%;
       width: auto;
@@ -395,9 +395,9 @@
       <div class="pcard-overlay kareta-blur"></div>
       <div class="pcard-logo kareta-blur"><span class="pcard-logo-txt">Kareta</span></div>
       
-      <div class="pcard-click-icon kareta-blur">
-        <img src="click me.webp"Click Me" />
-      </div>
+     <div class="pcard-click-icon kareta-blur">
+  <img src="click me.webp" alt="Click Me" />
+</div>
 
       <div class="pcard-meta kareta-blur">2025 — 2026</div>
       <div class="pcard-content kareta-blur">
@@ -463,10 +463,10 @@
         <div class="pcard-tag" data-lang="en">Case Competition</div>
         <div class="pcard-tag" data-lang="ru">Кейс-чемпионат</div>
         
-        <div class="pcard-title">
-            <span data-lang="en">VK & VTB Case Championships</span>
-            <span data-lang="ru">Кейс-чемпионаты VK и ВТБ</span>
-        </div>
+        <div class="pcard-title" style="font-size: 20px; white-space: nowrap;">
+    <span data-lang="en">VK & VTB Case Championships</span>
+    <span data-lang="ru">Кейс-чемпионаты VK и ВТБ</span>
+</div>
         
         <p class="pcard-desc">
             <span data-lang="en">Competed in the Changellenge Cup Moscow 2025, VKontakte, and VTB case championships. Applied strategic business analysis and product thinking to solve complex challenges for major technology and financial enterprises."</span>
@@ -477,7 +477,7 @@
 
 <div class="pcard">
   <div class="pcard-bg-logo"><img src="mipt.svg" alt="MIPT bg" /></div>
-  <div class="pcard-logo"><img src="mipt.svg" alt="MIPT" /></div>
+  <div class="pcard-logo"><img src="mipt.svg" alt="MIPT" style="height: 44px; width: 160px;" /></div>
   <div class="pcard-overlay"></div>
   <div class="pcard-meta">2025 — 2027</div>
   <div class="pcard-content">
