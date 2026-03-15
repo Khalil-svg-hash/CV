@@ -335,8 +335,7 @@
 <div class="portfolio-section">
   <div class="portfolio-grid">
 
-    <!-- Card 1 -->
-    <div class="pcard" data-tilt>
+    <div class="pcard">
       <div class="pcard-bg-logo"><img src="Yango_Play.svg" alt="Yandex bg" /></div>
       <div class="pcard-logo"><img src="Yango_Play.svg" alt="Yandex" /></div>
       <div class="pcard-overlay"></div>
@@ -355,8 +354,7 @@
       </div>
     </div>
 
-    <!-- Card 2 — Kareta with infinite slider -->
-    <div class="pcard" data-tilt>
+    <div class="pcard">
       <div class="pcard-bg-txt kareta-blur">K</div>
 
       <div class="kareta-slider-wrap">
@@ -388,8 +386,7 @@
       </div>
     </div>
 
-    <!-- Card 3 -->
-    <div class="pcard" data-tilt>
+    <div class="pcard">
       <div class="pcard-bg-txt">AI</div>
       <div class="pcard-logo"><img src="Merlin.svg" alt="Merlin" /></div>
       <div class="pcard-overlay"></div>
@@ -408,8 +405,7 @@
       </div>
     </div>
 
-    <!-- Card 4 -->
-    <div class="pcard" data-tilt>
+    <div class="pcard">
       <div class="pcard-bg-logo"><img src="rufilms.svg" alt="RuFilms bg" /></div>
       <div class="pcard-logo"><img src="rufilms.svg" alt="RuFilms" /></div>
       <div class="pcard-overlay"></div>
@@ -428,8 +424,7 @@
       </div>
     </div>
 
-    <!-- Card 5 -->
-    <div class="pcard" data-tilt>
+    <div class="pcard">
       <div class="pcard-logo"><img src="Changellenge.svg" alt="Changellenge" /></div>
       <div class="pcard-overlay"></div>
       <div class="pcard-meta">2025</div>
@@ -447,8 +442,7 @@
       </div>
     </div>
 
-<!-- Card 6 -->
-<div class="pcard" data-tilt>
+<div class="pcard">
   <div class="pcard-bg-logo"><img src="mipt.svg" alt="MIPT bg" /></div>
   <div class="pcard-logo"><img src="mipt.svg" alt="MIPT" /></div>
   <div class="pcard-overlay"></div>
@@ -473,7 +467,6 @@
 
 <div class="divider"></div>
 
-<!-- CERTIFICATES -->
 <div class="certs-section">
   <div class="section-tag" data-lang="en">Certificates & Courses</div>
   <div class="section-tag" data-lang="ru">Курсы и сертификаты</div>
@@ -544,17 +537,6 @@
   if(!isMobile) render();
   else { let lf=0; function mrender(n){if(n-lf>50){lf=n;t+=0.05;gl.uniform2f(uR,canvas.width,canvas.height);gl.uniform1f(uT,t);gl.drawArrays(gl.TRIANGLE_STRIP,0,4);} requestAnimationFrame(mrender);} mrender(0); }
 })();
-
-// TILT
-document.querySelectorAll('[data-tilt]').forEach(card => {
-  card.addEventListener('mousemove', e => {
-    const r = card.getBoundingClientRect();
-    const x = (e.clientX - r.left) / r.width - 0.5;
-    const y = (e.clientY - r.top) / r.height - 0.5;
-    card.style.transform = `perspective(1000px) rotateY(${x*10}deg) rotateX(${-y*10}deg) translateY(-8px) scale(1.02)`;
-  });
-  card.addEventListener('mouseleave', () => { card.style.transform = ''; });
-});
 
 // ──────────────────────────────────────
 // LANGUAGE SWITCHER
