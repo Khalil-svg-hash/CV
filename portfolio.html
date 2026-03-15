@@ -300,6 +300,26 @@
     .kareta-blur {
       transition: filter 0.4s ease, opacity 0.4s ease;
     }
+
+    /* ── NEW CLICK ME ICON ── */
+    .pcard-click-icon {
+      position: absolute;
+      top: 26px; /* Vertically aligns with the logo and date */
+      left: 50%; /* Centers it perfectly between left and right */
+      transform: translateX(-50%);
+      z-index: 3;
+      height: 16px; /* Keeps it small, matching the text size */
+      opacity: 0.6;
+      transition: opacity 0.3s ease;
+    }
+    .pcard-click-icon img {
+      height: 100%;
+      width: auto;
+      filter: drop-shadow(0 1px 3px rgba(0,0,0,0.8));
+    }
+    .pcard:hover .pcard-click-icon {
+      opacity: 1;
+    }
   </style>
 </head>
 <body>
@@ -374,6 +394,11 @@
 
       <div class="pcard-overlay kareta-blur"></div>
       <div class="pcard-logo kareta-blur"><span class="pcard-logo-txt">Kareta</span></div>
+      
+      <div class="pcard-click-icon kareta-blur">
+        <img src="click me.svg" alt="Click Me" />
+      </div>
+
       <div class="pcard-meta kareta-blur">2025 — 2026</div>
       <div class="pcard-content kareta-blur">
         <div class="pcard-tag" data-lang="en">Startup · Mobility</div>
