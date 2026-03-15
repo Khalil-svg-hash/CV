@@ -825,7 +825,7 @@
   <div class="cards-grid">
 
 
-    <div class="frosted-card" data-tilt>
+    <div class="frosted-card">
       <div class="card-icon-img"><img src="Yandex.svg" alt="Yandex / KinoPoisk" style="filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.6));" /></div>
       <div class="card-label">Oct 2023 — Present</div>
       <div class="card-title">KinoPoisk / Yandex</div>
@@ -850,7 +850,7 @@
     </div>
 
 
-    <div class="frosted-card" data-tilt>
+    <div class="frosted-card">
       <div class="card-icon-img"><img src="Merlin.svg" alt="Merlin"/></div>
       <div class="card-label">Jan 2025 — Jul 2025 · Part-time</div>
       <div class="card-title">Merlin</div>
@@ -869,7 +869,7 @@
     </div>
 
 
-    <div class="frosted-card" data-tilt>
+    <div class="frosted-card">
       <div class="card-icon-img"><img src="rufilms.svg" alt="RuFilms"/></div>
       <div class="card-label">Oct 2019 — Sep 2022 · Part-time</div>
       <div class="card-title">RuFilms LLC</div>
@@ -908,7 +908,7 @@
     </h2>
   </div>
   <div class="cards-grid">
-    <div class="frosted-card" data-tilt>
+    <div class="frosted-card">
       <div class="card-icon-img"><img src="mipt.svg" alt="Yandex / KinoPoisk" /></div>
       <div class="card-label">2025 — 2027</div>
       <div class="card-title">MIPT</div>
@@ -919,7 +919,7 @@
         <span data-lang="ru">Магистратура · Бизнес-информатика · Управление IT-продуктами</span>
       </div>
     </div>
-    <div class="frosted-card" data-tilt>
+    <div class="frosted-card">
       <div class="card-icon-img"><img src="spbpu.svg" alt="Yandex / KinoPoisk" /></div>
       <div class="card-label">2019 — 2023</div>
       <div class="card-title">SPbPU</div>
@@ -1168,34 +1168,6 @@
   requestAnimationFrame(render);
 })();
 
-// ──────────────────────────────────────
-// 3D TILT ON CARDS
-// ──────────────────────────────────────
-document.querySelectorAll('[data-tilt]').forEach(card => {
-  card.addEventListener('mousemove', e => {
-    const r = card.getBoundingClientRect();
-    const x = (e.clientX - r.left) / r.width - 0.5;
-    const y = (e.clientY - r.top) / r.height - 0.5;
-    card.style.transform = `perspective(800px) rotateY(${x*12}deg) rotateX(${-y*12}deg) scale(1.02)`;
-  });
-  card.addEventListener('mouseleave', () => {
-    card.style.transform = '';
-  });
-});
-
-// Portrait 3D tilt
-const portrait = document.getElementById('portrait3d');
-if(portrait){
-  portrait.addEventListener('mousemove', e => {
-    const r = portrait.getBoundingClientRect();
-    const x = (e.clientX - r.left) / r.width - 0.5;
-    const y = (e.clientY - r.top) / r.height - 0.5;
-    portrait.style.transform = `perspective(1000px) rotateY(${x*15}deg) rotateX(${-y*15}deg) translateY(-6px) scale(1.02)`;
-  });
-  portrait.addEventListener('mouseleave', () => {
-    portrait.style.transform = '';
-  });
-}
 
 // ──────────────────────────────────────
 // LANGUAGE SWITCHER
