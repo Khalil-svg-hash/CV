@@ -318,6 +318,63 @@
       transition: filter 0.4s ease, opacity 0.4s ease;
     }
 
+    /* ── YANGO PLAY INFINITE SLIDER ── */
+    .yango-slider-wrap {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .pcard:hover .yango-slider-wrap {
+      opacity: 1;
+    }
+    .yango-track-row {
+      display: flex;
+      flex-shrink: 0;
+      gap: 12px;
+      animation: slider-left-yango 18s linear infinite;
+      padding: 0 6px;
+      align-items: center;
+    }
+    .yango-slide {
+      width: 90px;
+      height: 180px;
+      min-width: 90px;
+      max-width: 90px;
+      border-radius: 10px;
+      overflow: hidden;
+      flex-shrink: 0;
+      flex-grow: 0;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+      background: #1a1a1a;
+    }
+    .yango-slide img {
+      width: 90px;
+      height: 180px;
+      display: block;
+      object-fit: cover;
+    }
+    @keyframes slider-left-yango {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(calc(-44 * (90px + 12px))); }
+    }
+
+    /* Text blur on Yango card hover */
+    .pcard:hover .yango-blur {
+      filter: blur(6px);
+      opacity: 0.15;
+      transition: filter 0.4s ease, opacity 0.4s ease;
+    }
+    .yango-blur {
+      transition: filter 0.4s ease, opacity 0.4s ease;
+    }
+
     /* ── NEW CLICK ME ICON ── */
     .pcard-click-icon {
   position: absolute;
@@ -372,11 +429,111 @@
   <div class="portfolio-grid">
 
     <div class="pcard">
-      <div class="pcard-bg-logo"><img src="Yango_Play.svg" alt="Yandex bg" /></div>
-      <div class="pcard-logo"><img src="Yango_Play.svg" alt="Yandex" /></div>
-      <div class="pcard-overlay"></div>
-      <div class="pcard-meta">2023 — Present</div>
-      <div class="pcard-content">
+      <div class="pcard-bg-logo yango-blur"><img src="Yango_Play.svg" alt="Yango Play bg" /></div>
+
+      <div class="yango-slider-wrap">
+        <div class="yango-track-row">
+          <div class="yango-slide"><img src="THE AMAZING SPIDER-MAN.webp" alt="" /></div>
+          <div class="yango-slide"><img src="GHOSTBUSTERS.webp" alt="" /></div>
+          <div class="yango-slide"><img src="THE AMAZING SPIDER-MAN 2.webp" alt="" /></div>
+          <div class="yango-slide"><img src="BAD BOYS 1995.webp" alt="" /></div>
+          <div class="yango-slide"><img src="JOHN WICK 3.webp" alt="" /></div>
+          <div class="yango-slide"><img src="JUJUTSU KAISEN.webp" alt="" /></div>
+          <div class="yango-slide"><img src="BABY DRIVER.webp" alt="" /></div>
+          <div class="yango-slide"><img src="LOST CITY OF Z.webp" alt="" /></div>
+          <div class="yango-slide"><img src="GONE GIRL.webp" alt="" /></div>
+          <div class="yango-slide"><img src="RESIDENT EVIL EXTINCTION.webp" alt="" /></div>
+          <div class="yango-slide"><img src="INSIDIOUS THE LAST KEY.webp" alt="" /></div>
+          <div class="yango-slide"><img src="INSIDIOUS CHAPTER 3.webp" alt="" /></div>
+          <div class="yango-slide"><img src="THE KARATE KID.webp" alt="" /></div>
+          <div class="yango-slide"><img src="GHOSTBUSTERS AFTERLIFE.webp" alt="" /></div>
+          <div class="yango-slide"><img src="INSIDIOUS CHAPTER 2.webp" alt="" /></div>
+          <div class="yango-slide"><img src="RESIDENT EVIL THE FINAL CHAPTER.webp" alt="" /></div>
+          <div class="yango-slide"><img src="JOHN WICK 2.webp" alt="" /></div>
+          <div class="yango-slide"><img src="THE MAN WHO FELL TO EARTH.webp" alt="" /></div>
+          <div class="yango-slide"><img src="BILLIONS S6.webp" alt="" /></div>
+          <div class="yango-slide"><img src="ASSASSINS CREED.webp" alt="" /></div>
+          <div class="yango-slide"><img src="ARRIVAL.webp" alt="" /></div>
+          <div class="yango-slide"><img src="WELCOME TO DEMON SCHOOLjpg.webp" alt="" /></div>
+          <div class="yango-slide"><img src="ALVI NAND NIXON.webp" alt="" /></div>
+          <div class="yango-slide"><img src="BILLIONS S5.webp" alt="" /></div>
+          <div class="yango-slide"><img src="FRASIER.webp" alt="" /></div>
+          <div class="yango-slide"><img src="YOUNG SHELDON.webp" alt="" /></div>
+          <div class="yango-slide"><img src="THE TWILIGHT ZONE.webp" alt="" /></div>
+          <div class="yango-slide"><img src="TALES OF THE WALKING DEAD.webp" alt="" /></div>
+          <div class="yango-slide"><img src="BAD BOYS FOR LIFE.webp" alt="" /></div>
+          <div class="yango-slide"><img src="ONE PUNCH MAN.webp" alt="" /></div>
+          <div class="yango-slide"><img src="THE WALKING DEAD DEAD CITY.webp" alt="" /></div>
+          <div class="yango-slide"><img src="SPY X FAMILY.webp" alt="" /></div>
+          <div class="yango-slide"><img src="BLACKBERRY.webp" alt="" /></div>
+          <div class="yango-slide"><img src="DR DEATHr.webp" alt="" /></div>
+          <div class="yango-slide"><img src="JOHN WICK 1.webp" alt="" /></div>
+          <div class="yango-slide"><img src="BAD BOYS 2.webp" alt="" /></div>
+          <div class="yango-slide"><img src="ALVIN 1.webp" alt="" /></div>
+          <div class="yango-slide"><img src="DEXTER.webp" alt="" /></div>
+          <div class="yango-slide"><img src="THE SERPENT QUEEN.webp" alt="" /></div>
+          <div class="yango-slide"><img src="HUNTER X HUNTER.webp" alt="" /></div>
+          <div class="yango-slide"><img src="YOUR HONOR.webp" alt="" /></div>
+          <div class="yango-slide"><img src="THE BATTLE OF UBER.webp" alt="" /></div>
+          <div class="yango-slide"><img src="THE FLASH.webp" alt="" /></div>
+          <div class="yango-slide"><img src="ALVIN 2.webp" alt="" /></div>
+          <!-- duplicate for seamless loop -->
+          <div class="yango-slide"><img src="THE AMAZING SPIDER-MAN.webp" alt="" /></div>
+          <div class="yango-slide"><img src="GHOSTBUSTERS.webp" alt="" /></div>
+          <div class="yango-slide"><img src="THE AMAZING SPIDER-MAN 2.webp" alt="" /></div>
+          <div class="yango-slide"><img src="BAD BOYS 1995.webp" alt="" /></div>
+          <div class="yango-slide"><img src="JOHN WICK 3.webp" alt="" /></div>
+          <div class="yango-slide"><img src="JUJUTSU KAISEN.webp" alt="" /></div>
+          <div class="yango-slide"><img src="BABY DRIVER.webp" alt="" /></div>
+          <div class="yango-slide"><img src="LOST CITY OF Z.webp" alt="" /></div>
+          <div class="yango-slide"><img src="GONE GIRL.webp" alt="" /></div>
+          <div class="yango-slide"><img src="RESIDENT EVIL EXTINCTION.webp" alt="" /></div>
+          <div class="yango-slide"><img src="INSIDIOUS THE LAST KEY.webp" alt="" /></div>
+          <div class="yango-slide"><img src="INSIDIOUS CHAPTER 3.webp" alt="" /></div>
+          <div class="yango-slide"><img src="THE KARATE KID.webp" alt="" /></div>
+          <div class="yango-slide"><img src="GHOSTBUSTERS AFTERLIFE.webp" alt="" /></div>
+          <div class="yango-slide"><img src="INSIDIOUS CHAPTER 2.webp" alt="" /></div>
+          <div class="yango-slide"><img src="RESIDENT EVIL THE FINAL CHAPTER.webp" alt="" /></div>
+          <div class="yango-slide"><img src="JOHN WICK 2.webp" alt="" /></div>
+          <div class="yango-slide"><img src="THE MAN WHO FELL TO EARTH.png" alt="" /></div>
+          <div class="yango-slide"><img src="BILLIONS S6.webp" alt="" /></div>
+          <div class="yango-slide"><img src="ASSASSINS CREED.webp" alt="" /></div>
+          <div class="yango-slide"><img src="ARRIVAL.webp" alt="" /></div>
+          <div class="yango-slide"><img src="WELCOME TO DEMON SCHOOLjpg.webp" alt="" /></div>
+          <div class="yango-slide"><img src="ALVI NAND NIXON.webp" alt="" /></div>
+          <div class="yango-slide"><img src="BILLIONS S5.webp" alt="" /></div>
+          <div class="yango-slide"><img src="FRASIER.webp" alt="" /></div>
+          <div class="yango-slide"><img src="YOUNG SHELDON.webp" alt="" /></div>
+          <div class="yango-slide"><img src="THE TWILIGHT ZONE.webp" alt="" /></div>
+          <div class="yango-slide"><img src="TALES OF THE WALKING DEAD.webp" alt="" /></div>
+          <div class="yango-slide"><img src="BAD BOYS FOR LIFE.webp" alt="" /></div>
+          <div class="yango-slide"><img src="ONE PUNCH MAN.webp" alt="" /></div>
+          <div class="yango-slide"><img src="THE WALKING DEAD DEAD CITY.png" alt="" /></div>
+          <div class="yango-slide"><img src="SPY X FAMILY.webp" alt="" /></div>
+          <div class="yango-slide"><img src="BLACKBERRY.webp" alt="" /></div>
+          <div class="yango-slide"><img src="DR DEATHr.webp" alt="" /></div>
+          <div class="yango-slide"><img src="JOHN WICK 1.webp" alt="" /></div>
+          <div class="yango-slide"><img src="BAD BOYS 2.webp" alt="" /></div>
+          <div class="yango-slide"><img src="ALVIN 1.webp" alt="" /></div>
+          <div class="yango-slide"><img src="DEXTER.webp" alt="" /></div>
+          <div class="yango-slide"><img src="THE SERPENT QUEEN.webp" alt="" /></div>
+          <div class="yango-slide"><img src="HUNTER X HUNTER.webp" alt="" /></div>
+          <div class="yango-slide"><img src="YOUR HONOR.webp" alt="" /></div>
+          <div class="yango-slide"><img src="THE BATTLE OF UBER.webp" alt="" /></div>
+          <div class="yango-slide"><img src="THE FLASH.webp" alt="" /></div>
+          <div class="yango-slide"><img src="ALVIN 2.webp" alt="" /></div>
+        </div>
+      </div>
+
+      <div class="pcard-overlay yango-blur"></div>
+      <div class="pcard-logo yango-blur"><img src="Yango_Play.svg" alt="Yango Play" /></div>
+
+      <div class="pcard-click-icon yango-blur">
+        <img src="click me.webp" alt="Click Me" />
+      </div>
+
+      <div class="pcard-meta yango-blur">2023 — Present</div>
+      <div class="pcard-content yango-blur">
         <div class="pcard-tag" data-lang="en">Streaming · MENA</div>
         <div class="pcard-tag" data-lang="ru">Стриминг · MENA</div>
         <div class="pcard-title">
