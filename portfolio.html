@@ -338,27 +338,29 @@
       display: flex;
       flex-shrink: 0;
       gap: 12px;
-      animation: slider-left-yango 18s linear infinite;
+      animation: slider-left-yango 35s linear infinite; /* ← EDIT SPEED HERE: increase = slower, decrease = faster */
       padding: 0 6px;
       align-items: center;
     }
     .yango-slide {
-      width: 90px;
+      width: auto;
       height: 180px;
       min-width: 90px;
-      max-width: 90px;
-      border-radius: 10px;
+      max-width: 140px;
+      border-radius: 0;
       overflow: hidden;
       flex-shrink: 0;
       flex-grow: 0;
       box-shadow: 0 4px 20px rgba(0,0,0,0.6);
       background: #1a1a1a;
+      display: flex;
+      align-items: center;
     }
     .yango-slide img {
-      width: 90px;
       height: 180px;
+      width: auto;
       display: block;
-      object-fit: cover;
+      object-fit: contain;
     }
     @keyframes slider-left-yango {
       0%   { transform: translateX(0); }
@@ -367,18 +369,21 @@
 
     /* Text blur on Yango card hover */
     .pcard:hover .yango-blur {
-      filter: blur(6px);
-      opacity: 0.15;
-      transition: filter 0.4s ease, opacity 0.4s ease;
+      opacity: 0;
+      transition: opacity 0.4s ease;
     }
     .yango-blur {
-      transition: filter 0.4s ease, opacity 0.4s ease;
+      transition: opacity 0.4s ease;
     }
 
     /* ── RUFILMS HOVER PHOTO ── */
     .rufilms-photo-wrap {
-      position: absolute; inset: 0; z-index: 2;
-      opacity: 0; transition: opacity 0.4s ease;
+      position: absolute;
+      top: 0; right: 0;
+      width: 55%; height: 100%;
+      z-index: 10;
+      opacity: 0;
+      transition: opacity 0.4s ease;
       pointer-events: none;
     }
     .pcard:hover .rufilms-photo-wrap {
@@ -387,14 +392,28 @@
     .rufilms-photo {
       width: 100%; height: 100%;
       object-fit: cover;
+      object-position: center top;
       display: block;
     }
+    /* Blurred backdrop on left half */
+    .rufilms-backdrop {
+      position: absolute;
+      inset: 0;
+      z-index: 9;
+      opacity: 0;
+      backdrop-filter: blur(12px);
+      background: rgba(8,8,8,0.55);
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+    .pcard:hover .rufilms-backdrop {
+      opacity: 1;
+    }
     .rufilms-blur {
-      transition: filter 0.4s ease, opacity 0.4s ease;
+      transition: opacity 0.4s ease;
     }
     .pcard:hover .rufilms-blur {
-      filter: blur(6px);
-      opacity: 0.15;
+      opacity: 0;
     }
 
     /* ── NEW CLICK ME ICON ── */
@@ -402,7 +421,7 @@
   position: absolute;
   top: 16px;
   left: 18px;
-  z-index: 3;
+  z-index: 11;
   height: 48px;
   opacity: 0.6;
   transition: opacity 0.3s ease;
@@ -456,7 +475,6 @@
       <div class="yango-slider-wrap">
         <div class="yango-track-row">
           <div class="yango-slide"><img src="THE AMAZING SPIDER-MAN.webp" alt="" /></div>
-          <div class="yango-slide"><img src="ONCE UPON A TIME IN HOLLYWOOD.webp" alt="" /></div>
           <div class="yango-slide"><img src="GHOSTBUSTERS.webp" alt="" /></div>
           <div class="yango-slide"><img src="THE AMAZING SPIDER-MAN 2.webp" alt="" /></div>
           <div class="yango-slide"><img src="BAD BOYS 1995.webp" alt="" /></div>
@@ -502,7 +520,6 @@
           <div class="yango-slide"><img src="ALVIN 2.webp" alt="" /></div>
           <!-- duplicate for seamless loop -->
           <div class="yango-slide"><img src="THE AMAZING SPIDER-MAN.webp" alt="" /></div>
-          <div class="yango-slide"><img src="ONCE UPON A TIME IN HOLLYWOOD.webp" alt="" /></div>
           <div class="yango-slide"><img src="GHOSTBUSTERS.webp" alt="" /></div>
           <div class="yango-slide"><img src="THE AMAZING SPIDER-MAN 2.webp" alt="" /></div>
           <div class="yango-slide"><img src="BAD BOYS 1995.webp" alt="" /></div>
@@ -552,7 +569,7 @@
       <div class="pcard-overlay yango-blur"></div>
       <div class="pcard-logo yango-blur"><img src="Yango_Play.svg" alt="Yango Play" /></div>
 
-      <div class="pcard-click-icon yango-blur">
+      <div class="pcard-click-icon">
         <img src="click me.webp" alt="Click Me" />
       </div>
 
@@ -630,20 +647,23 @@
     <div class="pcard">
       <div class="pcard-bg-logo rufilms-blur"><img src="rufilms.svg" alt="RuFilms bg" /></div>
 
-      <!-- DEBRA hover photo -->
+      <!-- blurred backdrop layer -->
+      <div class="rufilms-backdrop"></div>
+
+      <!-- DEBRA hover photo — right half -->
       <div class="rufilms-photo-wrap">
         <img src="DEBRA.webp" alt="DEBRA" class="rufilms-photo" />
       </div>
 
-      <div class="pcard-logo rufilms-blur"><img src="rufilms.svg" alt="RuFilms" /></div>
-      <div class="pcard-overlay rufilms-blur"></div>
+      <div class="pcard-logo rufilms-blur" style="z-index:12"><img src="rufilms.svg" alt="RuFilms" /></div>
+      <div class="pcard-overlay rufilms-blur" style="z-index:12"></div>
 
-      <div class="pcard-click-icon rufilms-blur">
+      <div class="pcard-click-icon">
         <img src="click me.webp" alt="Click Me" />
       </div>
 
-      <div class="pcard-meta rufilms-blur">2019 — 2022</div>
-      <div class="pcard-content rufilms-blur">
+      <div class="pcard-meta rufilms-blur" style="z-index:12">2019 — 2022</div>
+      <div class="pcard-content rufilms-blur" style="z-index:12">
         <div class="pcard-tag" data-lang="en">Localization · Media</div>
         <div class="pcard-tag" data-lang="ru">Локализация · Медиа</div>
         <div class="pcard-title">
