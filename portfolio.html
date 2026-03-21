@@ -409,6 +409,63 @@
       opacity: 0;
     }
 
+    /* ── MIPT CERTIFICATE SLIDER ── */
+    .mipt-slider-wrap {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .pcard:hover .mipt-slider-wrap {
+      opacity: 1;
+    }
+    .mipt-track-row {
+      display: flex;
+      flex-shrink: 0;
+      gap: 16px;
+      animation: slider-left-mipt 8s linear infinite;
+      padding: 0 12px;
+      align-items: center;
+    }
+    .mipt-slide {
+      height: 160px;
+      width: auto;
+      min-width: 240px;
+      max-width: 280px;
+      border-radius: 10px;
+      overflow: hidden;
+      flex-shrink: 0;
+      flex-grow: 0;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+      background: #1a1a1a;
+    }
+    .mipt-slide img {
+      height: 160px;
+      width: auto;
+      display: block;
+      object-fit: contain;
+    }
+    @keyframes slider-left-mipt {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(calc(-2 * (260px + 16px))); }
+    }
+
+    /* Blur on MIPT card hover */
+    .mipt-blur {
+      transition: filter 0.4s ease, opacity 0.4s ease;
+    }
+    .pcard:hover .mipt-blur {
+      filter: blur(6px);
+      opacity: 0.15;
+      transition: filter 0.4s ease, opacity 0.4s ease;
+    }
+
     /* ── NEW CLICK ME ICON ── */
     .pcard-click-icon {
   position: absolute;
@@ -673,11 +730,27 @@
 </div>
 
 <div class="pcard">
-  <div class="pcard-bg-logo"><img src="mipt.svg" alt="MIPT bg" /></div>
-  <div class="pcard-logo"><img src="mipt.svg" alt="MIPT" style="height: 44px; width: 160px;" /></div>
-  <div class="pcard-overlay"></div>
-  <div class="pcard-meta">2025 — 2027</div>
-  <div class="pcard-content">
+  <div class="pcard-bg-logo mipt-blur"><img src="mipt.svg" alt="MIPT bg" /></div>
+
+  <div class="mipt-slider-wrap">
+    <div class="mipt-track-row">
+      <div class="mipt-slide"><img src="mipt_cer_1.webp" alt="MIPT Certificate 1" /></div>
+      <div class="mipt-slide"><img src="mipt_cer_2.webp" alt="MIPT Certificate 2" /></div>
+      <!-- duplicates for seamless loop -->
+      <div class="mipt-slide"><img src="mipt_cer_1.webp" alt="MIPT Certificate 1" /></div>
+      <div class="mipt-slide"><img src="mipt_cer_2.webp" alt="MIPT Certificate 2" /></div>
+    </div>
+  </div>
+
+  <div class="pcard-overlay mipt-blur"></div>
+  <div class="pcard-logo mipt-blur"><img src="mipt.svg" alt="MIPT" style="height: 44px; width: 160px;" /></div>
+
+  <div class="pcard-click-icon">
+    <img src="click me.webp" alt="Click Me" />
+  </div>
+
+  <div class="pcard-meta mipt-blur">2025 — 2027</div>
+  <div class="pcard-content mipt-blur">
     <div class="pcard-tag" data-lang="en">Research · MIPT</div>
     <div class="pcard-tag" data-lang="ru">Исследования · МФТИ</div>
     <div class="pcard-title">
