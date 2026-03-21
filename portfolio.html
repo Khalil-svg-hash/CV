@@ -23,12 +23,13 @@
       --accent2: #7eb8c9;
       --radius: 16px;
     }
-    /* Language visibility — hide all by default, show active lang only */
+
     [data-lang] { display: none; }
     [data-active-lang="en"] [data-lang="en"] { display: revert; }
     [data-active-lang="ru"] [data-lang="ru"] { display: revert; }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
       background: var(--bg);
       color: var(--text);
@@ -37,9 +38,11 @@
       line-height: 1.6;
       overflow-x: hidden;
     }
+
     #shader-canvas {
       position: fixed; inset: 0; z-index: 0; opacity: 0.25; pointer-events: none;
     }
+
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; justify-content: space-between; align-items: center;
@@ -48,65 +51,74 @@
       background: rgba(8,8,8,0.6);
       border-bottom: 1px solid var(--border);
     }
+
     .nav-logo {
       font-family: 'Cormorant Garamond', serif; font-size: 22px;
       font-weight: 300; letter-spacing: 0.05em; color: var(--accent);
       text-decoration: none;
     }
+
     .nav-links { display: flex; gap: 32px; align-items: center; list-style: none; }
+
     .nav-links a {
       color: var(--muted); text-decoration: none; font-size: 13px;
       letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s;
     }
+
     .nav-links a:hover { color: var(--text); }
     .nav-links a.active { color: var(--accent); }
+
     .lang-toggle {
       display: flex; gap: 6px; background: var(--surface);
       border: 1px solid var(--border); border-radius: 20px; padding: 4px 6px;
     }
+
     .lang-btn {
       background: none; border: none; color: var(--muted); font-size: 12px;
       font-weight: 500; letter-spacing: 0.06em; padding: 4px 10px;
       border-radius: 14px; cursor: pointer; transition: all 0.2s;
       font-family: 'Inter', sans-serif;
     }
+
     .lang-btn.active { background: var(--accent); color: #080808; }
 
-    /* PAGE HEADER */
     .page-header {
       position: relative; z-index: 1;
       padding: 140px 40px 80px;
       max-width: 1200px; margin: 0 auto;
       text-align: center;
     }
+
     .page-tag {
       font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
       color: var(--accent); margin-bottom: 16px;
     }
+
     .page-title {
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(48px, 7vw, 84px); font-weight: 300;
       line-height: 0.95; margin-bottom: 20px;
     }
+
     .page-title em { font-style: italic; color: var(--accent); }
+
     .page-sub {
       font-size: 15px; color: var(--muted); max-width: 500px; margin: 0 auto;
       font-weight: 300;
     }
 
-    /* PORTFOLIO GRID */
     .portfolio-section {
       position: relative; z-index: 1;
       padding: 20px 40px 80px;
       max-width: 1200px; margin: 0 auto;
     }
+
     .portfolio-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
       gap: 20px;
     }
 
-    /* IMAGE FROSTED CARD */
     .pcard {
       position: relative; border-radius: 20px; overflow: hidden;
       aspect-ratio: 4/3;
@@ -116,41 +128,50 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s;
       will-change: transform;
     }
+
     .pcard:hover {
       transform: translateY(-8px);
       box-shadow: 0 30px 70px rgba(0,0,0,0.5);
       border-color: rgba(201,169,110,0.4);
     }
+
     .pcard-bg-txt {
-  position: absolute; inset: 0;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 72px; font-weight: 700;
-  font-family: 'Segoe UI', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-style: italic;
-  color: rgba(255,255,255,0.05); letter-spacing: -0.02em;
-  transition: color 0.4s; user-select: none;
-}
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 72px; font-weight: 700;
+      font-family: 'Segoe UI', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-style: italic;
+      color: rgba(255,255,255,0.05); letter-spacing: -0.02em;
+      transition: color 0.4s; user-select: none;
+    }
+
     .pcard:hover .pcard-bg { opacity: 0.25; }
+
     .pcard-overlay {
       position: absolute; inset: 0;
       background: linear-gradient(to top, rgba(8,8,8,0.9) 0%, rgba(8,8,8,0.3) 50%, transparent 100%);
     }
+
     .pcard-content {
       position: absolute; bottom: 0; left: 0; right: 0; padding: 28px;
     }
+
     .pcard-tag {
       font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
       color: var(--accent); margin-bottom: 8px;
     }
- .pcard-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 22px; font-weight: 400; margin-bottom: 6px; line-height: 1.15;
-  overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
-}
-.pcard-desc {
-  font-size: 11.5px; color: rgba(240,237,232,0.65); line-height: 1.45;
-  overflow: hidden; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical;
-}
+
+    .pcard-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; font-weight: 400; margin-bottom: 6px; line-height: 1.15;
+      overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+    }
+
+    .pcard-desc {
+      font-size: 11.5px; color: rgba(240,237,232,0.65); line-height: 1.45;
+      overflow: hidden; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical;
+    }
+
     .pcard-meta {
       position: absolute; top: 20px; right: 20px;
       background: rgba(8,8,8,0.8); border: 1px solid var(--border);
@@ -159,37 +180,43 @@
       letter-spacing: 0.05em;
     }
 
-    /* CERTS */
     .certs-section {
       position: relative; z-index: 1;
       padding: 0 40px 80px;
       max-width: 1200px; margin: 0 auto;
     }
+
     .section-tag {
       font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
       color: var(--accent); margin-bottom: 12px;
     }
+
     .section-title {
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(28px, 3.5vw, 42px); font-weight: 300;
       margin-bottom: 32px;
     }
+
     .certs-list {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 12px;
     }
+
     .cert-item {
       display: flex; align-items: flex-start; gap: 14px;
       background: var(--surface); border: 1px solid var(--border);
       border-radius: 12px; padding: 18px 20px;
       transition: border-color 0.2s;
     }
+
     .cert-item:hover { border-color: rgba(201,169,110,0.3); }
+
     .cert-year {
       font-size: 11px; color: var(--accent); letter-spacing: 0.05em;
       white-space: nowrap; padding-top: 2px;
     }
+
     .cert-name { font-size: 13px; color: var(--muted); line-height: 1.5; }
 
     .divider {
@@ -198,6 +225,7 @@
       margin: 0 40px 60px;
       position: relative; z-index: 1;
     }
+
     footer {
       position: relative; z-index: 1; text-align: center;
       padding: 40px; color: var(--muted); font-size: 12px;
@@ -211,45 +239,46 @@
       .portfolio-section, .certs-section { padding-left: 20px; padding-right: 20px; }
     }
 
-
     .pcard-bg-logo {
       position: absolute; inset: 0;
       display: flex; align-items: center; justify-content: center;
       opacity: 0.08; transition: opacity 0.4s; overflow: hidden;
     }
+
     .pcard:hover .pcard-bg-logo { opacity: 0.15; }
     .pcard-bg-logo img { width: 75%; height: 75%; object-fit: contain; }
     .pcard:hover .pcard-bg-txt { color: rgba(255,255,255,0.09); }
-    /* Visible logo badge */
+
     .pcard-logo {
-  position: absolute; top: 20px; left: 50%; transform: translateX(-50%); z-index: 3;
-  display: flex; align-items: center; height: 34px;
-}
+      position: absolute; top: 20px; left: 50%; transform: translateX(-50%); z-index: 3;
+      display: flex; align-items: center; height: 34px;
+    }
+
     .pcard-logo img {
-  height: 32px; width: 120px; object-fit: contain;
-  opacity: 0.8; transition: opacity 0.3s;
-  filter: drop-shadow(0 1px 5px rgba(0,0,0,0.7));
-}
+      height: 32px; width: 120px; object-fit: contain;
+      opacity: 0.8; transition: opacity 0.3s;
+      filter: drop-shadow(0 1px 5px rgba(0,0,0,0.7));
+    }
+
     .pcard-logo-txt {
-  font-size: 18px; font-weight: 700; letter-spacing: 0.02em;
-  text-transform: none; color: rgba(240,237,232,0.75);
-  transition: color 0.3s; text-shadow: 0 1px 5px rgba(0,0,0,0.8);
-  text-align: center;
-  font-family: 'Segoe UI', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-style: italic;
-}
+      font-size: 18px; font-weight: 700; letter-spacing: 0.02em;
+      text-transform: none; color: rgba(240,237,232,0.75);
+      transition: color 0.3s; text-shadow: 0 1px 5px rgba(0,0,0,0.8);
+      text-align: center;
+      font-family: 'Segoe UI', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-style: italic;
+    }
+
     .pcard:hover .pcard-logo-txt { color: rgba(240,237,232,0.85); }
-    /* Cert award icon */
+
     .cert-icon { flex-shrink:0; width:22px; height:22px; margin-top:2px; opacity:0.5; }
     .cert-icon svg { width:18px; height:18px; stroke: var(--accent); }
-
-    /* Removed the rule that hid Russian text */
-    /* [data-lang="ru"] { display: none; } */
 
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
     .page-tag { animation: fadeUp 0.5s ease both; }
     .page-title { animation: fadeUp 0.5s 0.1s ease both; }
     .page-sub { animation: fadeUp 0.5s 0.2s ease both; }
@@ -267,9 +296,9 @@
       pointer-events: none;
       overflow: hidden;
     }
-    .pcard:hover .kareta-slider-wrap {
-      opacity: 1;
-    }
+
+    .pcard:hover .kareta-slider-wrap { opacity: 1; }
+
     .kareta-track-row {
       display: flex;
       flex-shrink: 0;
@@ -278,6 +307,7 @@
       padding: 0 6px;
       align-items: center;
     }
+
     .kareta-slide {
       width: 90px;
       height: 180px;
@@ -290,23 +320,25 @@
       box-shadow: 0 4px 20px rgba(0,0,0,0.6);
       background: #1a1a1a;
     }
+
     .kareta-slide img {
       width: 90px;
       height: 180px;
       display: block;
       object-fit: cover;
     }
+
     @keyframes slider-left {
       0%   { transform: translateX(0); }
       100% { transform: translateX(calc(-5 * (90px + 12px))); }
     }
 
-    /* Text blur on Kareta card hover */
     .pcard:hover .kareta-blur {
       filter: blur(6px);
       opacity: 0.15;
       transition: filter 0.4s ease, opacity 0.4s ease;
     }
+
     .kareta-blur {
       transition: filter 0.4s ease, opacity 0.4s ease;
     }
@@ -324,17 +356,18 @@
       pointer-events: none;
       overflow: hidden;
     }
-    .pcard:hover .yango-slider-wrap {
-      opacity: 1;
-    }
+
+    .pcard:hover .yango-slider-wrap { opacity: 1; }
+
     .yango-track-row {
       display: flex;
       flex-shrink: 0;
       gap: 12px;
-      animation: slider-left-yango 35s linear infinite; /* ← EDIT SPEED HERE: increase = slower, decrease = faster */
+      animation: slider-left-yango 35s linear infinite;
       padding: 0 6px;
       align-items: center;
     }
+
     .yango-slide {
       width: auto;
       height: 180px;
@@ -349,22 +382,24 @@
       display: flex;
       align-items: center;
     }
+
     .yango-slide img {
       height: 180px;
       width: auto;
       display: block;
       object-fit: contain;
     }
+
     @keyframes slider-left-yango {
       0%   { transform: translateX(0); }
       100% { transform: translateX(calc(-44 * (90px + 12px))); }
     }
 
-    /* Text blur on Yango card hover */
     .pcard:hover .yango-blur {
       opacity: 0;
       transition: opacity 0.4s ease;
     }
+
     .yango-blur {
       transition: opacity 0.4s ease;
     }
@@ -379,16 +414,16 @@
       transition: opacity 0.4s ease;
       pointer-events: none;
     }
-    .pcard:hover .rufilms-photo-wrap {
-      opacity: 1;
-    }
+
+    .pcard:hover .rufilms-photo-wrap { opacity: 1; }
+
     .rufilms-photo {
       width: 100%; height: 100%;
       object-fit: cover;
       object-position: center top;
       display: block;
     }
-    /* Blurred backdrop on left half */
+
     .rufilms-backdrop {
       position: absolute;
       inset: 0;
@@ -399,14 +434,82 @@
       transition: opacity 0.4s ease;
       pointer-events: none;
     }
-    .pcard:hover .rufilms-backdrop {
-      opacity: 1;
-    }
+
+    .pcard:hover .rufilms-backdrop { opacity: 1; }
+
     .rufilms-blur {
       transition: opacity 0.4s ease;
     }
+
     .pcard:hover .rufilms-blur {
       opacity: 0;
+    }
+
+    /* ── CHANGELLENGE CERTIFICATE HOVER ── */
+    .changellenge-cert-wrap {
+      position: absolute;
+      top: 50%;
+      right: 18px;
+      transform: translateY(-50%) translateX(24px);
+      width: 58%;
+      height: 52%;
+      z-index: 10;
+      opacity: 0;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .pcard:hover .changellenge-cert-wrap {
+      opacity: 1;
+      transform: translateY(-50%) translateX(0);
+    }
+
+    .changellenge-cert {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      display: block;
+      filter: drop-shadow(0 10px 30px rgba(0,0,0,0.45));
+    }
+
+    .changellenge-backdrop {
+      position: absolute;
+      inset: 0;
+      z-index: 9;
+      opacity: 0;
+      backdrop-filter: blur(12px);
+      background:
+        linear-gradient(
+          to right,
+          rgba(8,8,8,0.72) 0%,
+          rgba(8,8,8,0.60) 42%,
+          rgba(8,8,8,0.22) 72%,
+          rgba(8,8,8,0.10) 100%
+        );
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    .pcard:hover .changellenge-backdrop {
+      opacity: 1;
+    }
+
+    .changellenge-blur {
+      transition: opacity 0.4s ease, filter 0.4s ease;
+    }
+
+    .pcard:hover .changellenge-blur {
+      opacity: 0;
+    }
+
+    .changellenge-card .pcard-logo img {
+      height: 30px;
+      width: 140px;
+      object-fit: contain;
     }
 
     /* ── MIPT CERTIFICATE SLIDER ── */
@@ -422,9 +525,9 @@
       pointer-events: none;
       overflow: hidden;
     }
-    .pcard:hover .mipt-slider-wrap {
-      opacity: 1;
-    }
+
+    .pcard:hover .mipt-slider-wrap { opacity: 1; }
+
     .mipt-track-row {
       display: flex;
       flex-shrink: 0;
@@ -433,6 +536,7 @@
       padding: 0 12px;
       align-items: center;
     }
+
     .mipt-slide {
       height: 160px;
       width: auto;
@@ -445,42 +549,46 @@
       box-shadow: 0 4px 20px rgba(0,0,0,0.6);
       background: #1a1a1a;
     }
+
     .mipt-slide img {
       height: 160px;
       width: auto;
       display: block;
       object-fit: contain;
     }
+
     @keyframes slider-left-mipt {
       0%   { transform: translateX(0); }
       100% { transform: translateX(calc(-2 * (260px + 16px))); }
     }
 
-    /* Blur on MIPT card hover */
     .mipt-blur {
       transition: filter 0.4s ease, opacity 0.4s ease;
     }
+
     .pcard:hover .mipt-blur {
       filter: blur(6px);
       opacity: 0.15;
       transition: filter 0.4s ease, opacity 0.4s ease;
     }
 
-    /* ── NEW CLICK ME ICON ── */
+    /* ── CLICK ME ICON ── */
     .pcard-click-icon {
-  position: absolute;
-  top: 16px;
-  left: 18px;
-  z-index: 11;
-  height: 48px;
-  opacity: 0.6;
-  transition: opacity 0.3s ease;
-}
+      position: absolute;
+      top: 16px;
+      left: 18px;
+      z-index: 11;
+      height: 48px;
+      opacity: 0.6;
+      transition: opacity 0.3s ease;
+    }
+
     .pcard-click-icon img {
       height: 100%;
       width: auto;
       filter: drop-shadow(0 1px 3px rgba(0,0,0,0.8));
     }
+
     .pcard:hover .pcard-click-icon {
       opacity: 1;
     }
@@ -568,7 +676,6 @@
           <div class="yango-slide"><img src="THE BATTLE OF UBER.webp" alt="" /></div>
           <div class="yango-slide"><img src="THE FLASH.webp" alt="" /></div>
           <div class="yango-slide"><img src="ALVIN 2.webp" alt="" /></div>
-          <!-- duplicate for seamless loop -->
           <div class="yango-slide"><img src="FRASIER.webp" alt="" /></div>
           <div class="yango-slide"><img src="YOUNG SHELDON.webp" alt="" /></div>
           <div class="yango-slide"><img src="THE TWILIGHT ZONE.webp" alt="" /></div>
@@ -589,7 +696,7 @@
           <div class="yango-slide"><img src="THE BATTLE OF UBER.webp" alt="" /></div>
           <div class="yango-slide"><img src="THE FLASH.webp" alt="" /></div>
           <div class="yango-slide"><img src="ALVIN 2.webp" alt="" /></div>
-      </div>
+        </div>
       </div>
 
       <div class="pcard-overlay yango-blur"></div>
@@ -634,10 +741,10 @@
 
       <div class="pcard-overlay kareta-blur"></div>
       <div class="pcard-logo kareta-blur"><span class="pcard-logo-txt">Kareta</span></div>
-      
-     <div class="pcard-click-icon kareta-blur">
-  <img src="click me.webp" alt="Click Me" />
-</div>
+
+      <div class="pcard-click-icon kareta-blur">
+        <img src="click me.webp" alt="Click Me" />
+      </div>
 
       <div class="pcard-meta kareta-blur">2025 — 2026</div>
       <div class="pcard-content kareta-blur">
@@ -673,10 +780,8 @@
     <div class="pcard">
       <div class="pcard-bg-logo rufilms-blur"><img src="rufilms.svg" alt="RuFilms bg" /></div>
 
-      <!-- blurred backdrop layer -->
       <div class="rufilms-backdrop"></div>
 
-      <!-- DEBRA hover photo — right half -->
       <div class="rufilms-photo-wrap">
         <img src="DEBRA.webp" alt="DEBRA" class="rufilms-photo" />
       </div>
@@ -703,67 +808,77 @@
       </div>
     </div>
 
-    <div class="pcard">
-    
-    <div class="pcard-top-content">
-        <div class="pcard-logo">
-            <img src="Changellenge.svg" alt="Changellenge" />
-        </div>
-        <div class="pcard-meta">2025</div>
-    </div>
-    <div class="pcard-overlay"></div>
-    
-    <div class="pcard-content">
+    <div class="pcard changellenge-card">
+      <div class="pcard-bg-logo changellenge-blur">
+      </div>
+
+      <div class="changellenge-backdrop"></div>
+
+      <div class="changellenge-cert-wrap">
+        <img src="vk_cer.webp" alt="VK certificate" class="changellenge-cert" />
+      </div>
+
+      <div class="pcard-logo changellenge-blur" style="z-index:12">
+        <img src="Changellenge.svg" alt="Changellenge" />
+      </div>
+
+      <div class="pcard-overlay changellenge-blur" style="z-index:12"></div>
+
+      <div class="pcard-click-icon">
+        <img src="click me.webp" alt="Click Me" />
+      </div>
+
+      <div class="pcard-meta changellenge-blur" style="z-index:12">2025</div>
+
+      <div class="pcard-content changellenge-blur" style="z-index:12">
         <div class="pcard-tag" data-lang="en">Case Competition</div>
         <div class="pcard-tag" data-lang="ru">Кейс-чемпионат</div>
-        
+
         <div class="pcard-title" style="font-size: 20px; white-space: nowrap;">
-    <span data-lang="en">VK & VTB Case Championships</span>
-    <span data-lang="ru">Кейс-чемпионаты VK и ВТБ</span>
-</div>
-        
+          <span data-lang="en">VK & VTB Case Championships</span>
+          <span data-lang="ru">Кейс-чемпионаты VK и ВТБ</span>
+        </div>
+
         <p class="pcard-desc">
-            <span data-lang="en">Competed in the Changellenge Cup Moscow 2025, VKontakte, and VTB case championships. Applied strategic business analysis and product thinking to solve complex challenges for major technology and financial enterprises."</span>
-            <span data-lang="ru">Участвовал в кейс-чемпионатах Changellenge Cup Moscow 2025, VK и ВТБ. Применял методы стратегического бизнес-анализа и продуктового мышления для решения задач крупнейших технологических и финансовых компаний.</span>
+          <span data-lang="en">Competed in the Changellenge Cup Moscow 2025, VKontakte, and VTB case championships. Applied strategic business analysis and product thinking to solve complex challenges for major technology and financial enterprises.</span>
+          <span data-lang="ru">Участвовал в кейс-чемпионатах Changellenge Cup Moscow 2025, VK и ВТБ. Применял методы стратегического бизнес-анализа и продуктового мышления для решения задач крупнейших технологических и финансовых компаний.</span>
         </p>
+      </div>
     </div>
-</div>
 
-<div class="pcard">
-  <div class="pcard-bg-logo mipt-blur"><img src="mipt.svg" alt="MIPT bg" /></div>
+    <div class="pcard">
+      <div class="pcard-bg-logo mipt-blur"><img src="mipt.svg" alt="MIPT bg" /></div>
 
-  <div class="mipt-slider-wrap">
-    <div class="mipt-track-row">
-      <div class="mipt-slide"><img src="mipt_cer_1.webp" alt="MIPT Certificate 1" /></div>
-      <div class="mipt-slide"><img src="mipt_cer_2.webp" alt="MIPT Certificate 2" /></div>
-      <!-- duplicates for seamless loop -->
-      <div class="mipt-slide"><img src="mipt_cer_1.webp" alt="MIPT Certificate 1" /></div>
-      <div class="mipt-slide"><img src="mipt_cer_2.webp" alt="MIPT Certificate 2" /></div>
+      <div class="mipt-slider-wrap">
+        <div class="mipt-track-row">
+          <div class="mipt-slide"><img src="mipt_cer_1.webp" alt="MIPT Certificate 1" /></div>
+          <div class="mipt-slide"><img src="mipt_cer_2.webp" alt="MIPT Certificate 2" /></div>
+          <div class="mipt-slide"><img src="mipt_cer_1.webp" alt="MIPT Certificate 1" /></div>
+          <div class="mipt-slide"><img src="mipt_cer_2.webp" alt="MIPT Certificate 2" /></div>
+        </div>
+      </div>
+
+      <div class="pcard-overlay mipt-blur"></div>
+      <div class="pcard-logo mipt-blur"><img src="mipt.svg" alt="MIPT" style="height: 44px; width: 160px;" /></div>
+
+      <div class="pcard-click-icon">
+        <img src="click me.webp" alt="Click Me" />
+      </div>
+
+      <div class="pcard-meta mipt-blur">2025 — 2027</div>
+      <div class="pcard-content mipt-blur">
+        <div class="pcard-tag" data-lang="en">Research · MIPT</div>
+        <div class="pcard-tag" data-lang="ru">Исследования · МФТИ</div>
+        <div class="pcard-title">
+          <span data-lang="en">IT Product Management (MSc)</span>
+          <span data-lang="ru">Управление IT-продуктами (магистратура)</span>
+        </div>
+        <p class="pcard-desc">
+          <span data-lang="en">Currently pursuing a Master's at MIPT — one of Russia's top technical universities — focusing on business informatics and IT product management methodologies.</span>
+          <span data-lang="ru">Обучаюсь в магистратуре МФТИ — одного из ведущих технических вузов России. Специализация: бизнес-информатика и методологии управления IT-продуктами.</span>
+        </p>
+      </div>
     </div>
-  </div>
-
-  <div class="pcard-overlay mipt-blur"></div>
-  <div class="pcard-logo mipt-blur"><img src="mipt.svg" alt="MIPT" style="height: 44px; width: 160px;" /></div>
-
-  <div class="pcard-click-icon">
-    <img src="click me.webp" alt="Click Me" />
-  </div>
-
-  <div class="pcard-meta mipt-blur">2025 — 2027</div>
-  <div class="pcard-content mipt-blur">
-    <div class="pcard-tag" data-lang="en">Research · MIPT</div>
-    <div class="pcard-tag" data-lang="ru">Исследования · МФТИ</div>
-    <div class="pcard-title">
-      <span data-lang="en">IT Product Management (MSc)</span>
-      <span data-lang="ru">Управление IT-продуктами (магистратура)</span>
-    </div>
-    <p class="pcard-desc">
-      <span data-lang="en">Currently pursuing a Master's at MIPT — one of Russia's top technical universities — focusing on business informatics and IT product management methodologies.</span>
-      <span data-lang="ru">Обучаюсь в магистратуре МФТИ — одного из ведущих технических вузов России. Специализация: бизнес-информатика и методологии управления IT-продуктами.</span>
-    </p>
-  </div>
-</div>
-
 
   </div>
 </div>
@@ -818,38 +933,79 @@
   <span data-lang="ru">© 2026 Халиль Шараф · <a href="index.html" style="color:var(--accent);text-decoration:none;">← На главную</a></span>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-// SHADER
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script>
 (function(){
   const canvas = document.getElementById('shader-canvas');
   const gl = canvas.getContext('webgl');
   if(!gl) return;
   const isMobile = /Mobi|Android/i.test(navigator.userAgent);
-  function resize(){ canvas.width=window.innerWidth; canvas.height=window.innerHeight; gl.viewport(0,0,canvas.width,canvas.height); }
-  resize(); window.addEventListener('resize',resize);
-  const vs=`attribute vec2 a_pos;void main(){gl_Position=vec4(a_pos,0,1);}`;
-  const fs=`precision highp float;uniform vec2 u_res;uniform float u_time;float random(in float x){return fract(sin(x)*1e4);}float random(in vec2 st){return fract(sin(dot(st.xy,vec2(12.9898,78.233)))*43758.5453123);}void main(){vec2 uv=(gl_FragCoord.xy*2.0-u_res.xy)/min(u_res.x,u_res.y);vec2 fMosaicScal=vec2(4.0,2.0);vec2 vScreenSize=vec2(256.0,256.0);uv.x=floor(uv.x*vScreenSize.x/fMosaicScal.x)/(vScreenSize.x/fMosaicScal.x);uv.y=floor(uv.y*vScreenSize.y/fMosaicScal.y)/(vScreenSize.y/fMosaicScal.y);float t=u_time*0.06+random(uv.x)*0.4;float lineWidth=0.0008;vec3 color=vec3(0.0);for(int j=0;j<3;j++){for(int i=0;i<5;i++){color[j]+=lineWidth*float(i*i)/abs(fract(t-0.01*float(j)+float(i)*0.01)*1.0-length(uv));}}gl_FragColor=vec4(color[2],color[1],color[0],1.0);}`;
-  function sh(t,s){const x=gl.createShader(t);gl.shaderSource(x,s);gl.compileShader(x);return x;}
-  const p=gl.createProgram();
-  gl.attachShader(p,sh(gl.VERTEX_SHADER,vs));gl.attachShader(p,sh(gl.FRAGMENT_SHADER,fs));gl.linkProgram(p);gl.useProgram(p);
-  const b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
-  const pos=gl.getAttribLocation(p,'a_pos');gl.enableVertexAttribArray(pos);gl.vertexAttribPointer(pos,2,gl.FLOAT,false,0,0);
-  const uR=gl.getUniformLocation(p,'u_res'),uT=gl.getUniformLocation(p,'u_time');
-  let t=0;
-  function render(){requestAnimationFrame(render);t+=0.05;gl.uniform2f(uR,canvas.width,canvas.height);gl.uniform1f(uT,t);gl.drawArrays(gl.TRIANGLE_STRIP,0,4);}
+  function resize(){
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    gl.viewport(0,0,canvas.width,canvas.height);
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const vs = `attribute vec2 a_pos;void main(){gl_Position=vec4(a_pos,0,1);}`;
+  const fs = `precision highp float;uniform vec2 u_res;uniform float u_time;float random(in float x){return fract(sin(x)*1e4);}float random(in vec2 st){return fract(sin(dot(st.xy,vec2(12.9898,78.233)))*43758.5453123);}void main(){vec2 uv=(gl_FragCoord.xy*2.0-u_res.xy)/min(u_res.x,u_res.y);vec2 fMosaicScal=vec2(4.0,2.0);vec2 vScreenSize=vec2(256.0,256.0);uv.x=floor(uv.x*vScreenSize.x/fMosaicScal.x)/(vScreenSize.x/fMosaicScal.x);uv.y=floor(uv.y*vScreenSize.y/fMosaicScal.y)/(vScreenSize.y/fMosaicScal.y);float t=u_time*0.06+random(uv.x)*0.4;float lineWidth=0.0008;vec3 color=vec3(0.0);for(int j=0;j<3;j++){for(int i=0;i<5;i++){color[j]+=lineWidth*float(i*i)/abs(fract(t-0.01*float(j)+float(i)*0.01)*1.0-length(uv));}}gl_FragColor=vec4(color[2],color[1],color[0],1.0);}`;
+
+  function sh(t,s){
+    const x = gl.createShader(t);
+    gl.shaderSource(x,s);
+    gl.compileShader(x);
+    return x;
+  }
+
+  const p = gl.createProgram();
+  gl.attachShader(p, sh(gl.VERTEX_SHADER,vs));
+  gl.attachShader(p, sh(gl.FRAGMENT_SHADER,fs));
+  gl.linkProgram(p);
+  gl.useProgram(p);
+
+  const b = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER,b);
+  gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
+
+  const pos = gl.getAttribLocation(p,'a_pos');
+  gl.enableVertexAttribArray(pos);
+  gl.vertexAttribPointer(pos,2,gl.FLOAT,false,0,0);
+
+  const uR = gl.getUniformLocation(p,'u_res');
+  const uT = gl.getUniformLocation(p,'u_time');
+
+  let t = 0;
+  function render(){
+    requestAnimationFrame(render);
+    t += 0.05;
+    gl.uniform2f(uR,canvas.width,canvas.height);
+    gl.uniform1f(uT,t);
+    gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
+  }
+
   if(!isMobile) render();
-  else { let lf=0; function mrender(n){if(n-lf>50){lf=n;t+=0.05;gl.uniform2f(uR,canvas.width,canvas.height);gl.uniform1f(uT,t);gl.drawArrays(gl.TRIANGLE_STRIP,0,4);} requestAnimationFrame(mrender);} mrender(0); }
+  else {
+    let lf = 0;
+    function mrender(n){
+      if(n-lf>50){
+        lf=n;
+        t+=0.05;
+        gl.uniform2f(uR,canvas.width,canvas.height);
+        gl.uniform1f(uT,t);
+        gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
+      }
+      requestAnimationFrame(mrender);
+    }
+    mrender(0);
+  }
 })();
 
-// ──────────────────────────────────────
-// LANGUAGE SWITCHER
-// ──────────────────────────────────────
 function setLang(lang){
   document.documentElement.setAttribute('data-active-lang', lang);
   document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
   document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
 
-  // Handle [data-en] / [data-ru] attributes on nav links
   document.querySelectorAll('[data-en][data-ru]').forEach(el => {
     el.textContent = lang === 'en' ? el.getAttribute('data-en') : el.getAttribute('data-ru');
   });
@@ -857,7 +1013,6 @@ function setLang(lang){
   localStorage.setItem('lang', lang);
 }
 
-// Initialize language on page load
 setLang(localStorage.getItem('lang') || 'en');
 </script>
 </body>
